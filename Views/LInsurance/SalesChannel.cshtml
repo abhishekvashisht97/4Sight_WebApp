@@ -1,0 +1,192 @@
+﻿
+@{
+    ViewBag.Title = "Sales Channel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="content-header">
+    <h1>Sales Channel</h1>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body pad">
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <div class="table-responsive">
+                            <table id="tblAgentPhase" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Sales Type</th>
+                                        <th>Sales Channel Name</th>
+                                        @*<th>Agent Name / Broker Code / Online  </th>*@
+                                        <th>Agent / Broker / Online Code</th>
+                                        <th>Total No. Of Policy Sold </th>
+                                        <th>Total Insured Amount Till Date (&#x20b9;)</th>
+                                        <th style="width:100px;">Area</th>
+                                        <th>Area Code </th>
+                                        <th>Total No. Of Claims Received</th>
+                                        <th>Total Amount Of Claim Received (&#x20b9;)</th>
+                                        <th> Processed Claim Till Date </th>
+                                        <th>Processed Claim Amount (&#x20b9;)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Agent</td>
+                                        <td>Anish Shukla</td>                                        
+                                        <td>A248702</td>
+                                        <td class="text-right">20</td>
+                                        <td class="text-right">200000000</td>
+                                        <td>Mumbai, Thane </td>
+                                        <td class="text-right">20</td>
+                                        <td class="text-right">10</td>
+                                        <td class="text-right">30000000</td>
+                                        <td class="text-right">6</td>
+                                        <td class="text-right">18000000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Agent</td>
+                                        <td>Mayur Ganesh</td>
+                                        
+                                        <td>A260850</td>
+                                        <td class="text-right">15</td>
+                                        <td class="text-right">300000000</td>
+                                        <td>Mumbai , kurla </td>
+                                        <td class="text-right">5</td>
+                                        <td class="text-right">16</td>
+                                        <td class="text-right">28000000</td>
+                                        <td class="text-right">3</td>
+                                        <td class="text-right">20000000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Broker</td>
+                                        <td>Jagdish Jade</td>                                        
+                                        <td>A248302</td>
+                                        <td class="text-right">20</td>
+                                        <td class="text-right">200000000</td>
+                                        <td>Mumbai, Santacruz </td>
+                                        <td class="text-right">20</td>
+                                        <td class="text-right">12</td>
+                                        <td class="text-right">29000000</td>
+                                        <td class="text-right">6</td>
+                                        <td class="text-right">17000000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Online</td>
+                                        <td>Policy Bazar</td>                                       
+                                        <td>A260800</td>
+                                        <td class="text-right">25</td>
+                                        <td class="text-right">300000000</td>
+                                        <td>Mumbai , VileParle </td>
+                                        <td class="text-right">5</td>
+                                        <td class="text-right">16</td>
+                                        <td class="text-right">28000000</td>
+                                        <td class="text-right">3</td>
+                                        <td class="text-right">25000000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Online</td>
+                                        <td>Policy Bazar</td>
+                                        <td>A248802</td>
+                                        <td class="text-right">20</td>
+                                        <td class="text-right">200000000</td>
+                                        <td>Mumbai, Goregaon </td>
+                                        <td class="text-right">20</td>
+                                        <td class="text-right">13</td>
+                                        <td class="text-right">28000000</td>
+                                        <td class="text-right">10</td>
+                                        <td class="text-right">20000000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Broker</td>
+                                        <td>Hansi Mathew</td>                                        
+                                        <td>A264850</td>
+                                        <td class="text-right">35</td>
+                                        <td class="text-right">300000000</td>
+                                        <td>Mumbai , Malad </td>
+                                        <td class="text-right">5</td>
+                                        <td class="text-right">15</td>
+                                        <td class="text-right">28000000</td>
+                                        <td class="text-right">3</td>
+                                        <td class="text-right">20000000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Broker</td>
+                                        <td>Sandya Mudaliyar</td>                                        
+                                        <td>A248402</td>
+                                        <td class="text-right">20</td>
+                                        <td class="text-right">200000000</td>
+                                        <td>Mumbai, Jogeshwari </td>
+                                        <td class="text-right">20</td>
+                                        <td class="text-right">15</td>
+                                        <td class="text-right">28000000</td>
+                                        <td class="text-right">3</td>
+                                        <td class="text-right">19000000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Agent</td>
+                                        <td>Shriman Nadar</td>                                       
+                                        <td>A260350</td>
+                                        <td class="text-right">15</td>
+                                        <td class="text-right">300000000</td>
+                                        <td>Mumbai , Malad </td>
+                                        <td class="text-right">5</td>
+                                        <td class="text-right">22</td>
+                                        <td class="text-right">180000000</td>
+                                        <td class="text-right">3</td>
+                                        <td class="text-right">18000000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Online</td>
+                                        <td>Policy Bazar</td>
+                                        <td>A248732</td>
+                                        <td class="text-right">11</td>
+                                        <td class="text-right">200000000</td>
+                                        <td>Mumbai, Thane </td>
+                                        <td class="text-right">20</td>
+                                        <td class="text-right">10</td>
+                                        <td class="text-right">27000000</td>
+                                        <td class="text-right">2</td>
+                                        <td class="text-right">17000000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Online</td>
+                                        <td>Policy Bazar</td>
+                                        <td>A261850</td>
+                                        <td class="text-right">15</td>
+                                        <td class="text-right">300000000</td>
+                                        <td>Mumbai , Kurla </td>
+                                        <td class="text-right">5</td>
+                                        <td class="text-right">10</td>
+                                        <td class="text-right">300000000</td>
+                                        <td class="text-right">3</td>
+                                        <td class="text-right">30000000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(function () {
+
+        $('#tblAgentPhase').DataTable({
+            "lengthMenu": [[10, 25, 50, 100, 1000], [10, 25, 50, 100, 1000]],
+            "processing": true, // for show progress bar
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            "pageLength": 10,
+            "stateSave": true,
+        });
+    });
+</script>
+

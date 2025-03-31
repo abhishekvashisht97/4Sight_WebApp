@@ -1,0 +1,181 @@
+﻿@{
+    ViewBag.Title = "Diagnostic Center";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .pagination {
+        margin-top: 30px !important;
+    }
+</style>
+<section class="content-header">
+    <h1>
+        Diagnostic Centre
+    </h1>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body pad">
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <a href="#" class="btn btn-primary margin-l-m15"><span class="fa fa-plus-square">&nbsp;</span>Add New</a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr />
+                    <div class="form-group">
+                        <table id="tblDiagnostic" class="table table-responsive table-striped table-bordered dt-responsive nowrap" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Center Name</th>
+                                    <th>Hostile/Vulnerable</th>
+                                    <th>Address</th>
+                                    <th>Mobile</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Suburban  Diagnostics</td>
+                                    <td><span class="glyphicon glyphicon-ok text-success"></span></td>
+                                    <td>PHC KALEPAL</td>
+                                    <td class="text-right">9978654320</td>
+                                    <td>phc@gmail.com</td>
+
+                                </tr>
+                                <tr>
+                                    <td>Apollo Diagnostics</td>
+                                    <td><span class="glyphicon glyphicon-remove text-danger"></span></td>
+                                    <td>Civil Hospital Kharsia</td>
+                                    <td class="text-right">9089876543</td>
+                                    <td>apollo@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>Ghirgholi  Diagnostics</td>
+                                    <td><span class="glyphicon glyphicon-ok text-success"></span></td>
+                                    <td>Primary Health Center Ghirgholi</td>
+                                    <td class="text-right">4356789098</td>
+                                    <td>Ghirgholi@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>Maxis Health Centre</td>
+                                    <td><span class="glyphicon glyphicon-ok text-success"></span></td>
+                                    <td>Unit No 12/19 Prabhadevi Industrial Estate, Veer Savarkar Marg, Prabhadevi, Mumbai - 400025, Near Siddhivinayak Temple</td>
+                                    <td class="text-right">8965412307</td>
+                                    <td>MaxisHealthCentre@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>Lifecare Diagnostic & Research Centre</td>
+                                    <td><span class="glyphicon glyphicon-ok text-success"></span></td>
+                                    <td>1st Floor, Sunshine Building, Lokhandwala Complex, Near Lokhandwala Circle, Andheri West, Mumbai - 400053, Opposite Shastri Nagar</td>
+                                    <td class="text-right">9152244482</td>
+                                    <td>LifecareDiagnostic@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>SRL Diagnostic Centre</td>
+                                    <td><span class="glyphicon glyphicon-remove text-danger"></span></td>
+                                    <td>Shop No 25 Adinath Tower Nancy Colony, Borivali East, Mumbai - 400066, Opp Nancy ST Depo </td>
+                                    <td class="text-right">9152305725</td>
+                                    <td>SRLDiagnostic@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>Nutech Diagnostic Centre</td>
+                                    <td><span class="glyphicon glyphicon-remove text-danger"></span></td>
+                                    <td>Ground Floor, Shelar Park, Khadakpada-Sai Chowk Road, Kalyan City, Mumbai - 421301, Opp Venkatesh Hospital</td>
+                                    <td class="text-right">8097222000</td>
+                                    <td>NutechDiagnostic@gmail.com</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <div class="clearfix"></div>                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<section class="content-header">
+    <h1>
+        Fraudulent Cases
+    </h1>
+</section>
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body pad">
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <table id="tblFraudulent" class="table table-responsive table-striped table-bordered dt-responsive nowrap" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Gender</th>
+                                    <th>Industry</th>
+
+                                    <th>BMI</th>
+                                    <th>Insurance company</th>
+
+                                    <th>Dignostics center</th>
+                                    <th>Package</th>
+                                    <th>last claim utlisations date</th>
+                                    <th>past claims utlised amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>xyz</td>
+                                    <td>28</td>
+                                    <td>Male</td>
+                                    <td>Advertising</td>
+
+                                    <td>30.69</td>
+                                    <td>aditya birla</td>
+                                    <td class="text-danger">suburban diagnostics</td>
+                                    <td class="text-danger">BASIC PACKAGE</td>
+                                    <td>8/13/2019</td>
+                                    <td>30000</td>
+                                </tr>
+                                <tr>
+                                    <td>abc</td>
+                                    <td>32</td>
+                                    <td>female</td>
+                                    <td>BPO</td>
+                                    <td>31.22</td>
+                                    <td>bajaj alianz</td>
+                                    <td>apollo diagnostics</td>
+                                    <td>Female package</td>
+                                    <td>9/13/2019</td>
+                                    <td>50000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>*@
+<script>
+    $(function () {
+
+        $('#tblDiagnostic').DataTable({
+            //"lengthMenu": [[10, 25, 50, 100, 1000], [10, 25, 50, 100, 1000]],
+            "processing": true, // for show progress bar
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            // "pageLength": 10,
+            "stateSave": true,
+        });
+    });
+</script>

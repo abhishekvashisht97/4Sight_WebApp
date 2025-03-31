@@ -1,0 +1,731 @@
+﻿@model AyushmanBharat.Models.ViewModels.ClaimVM
+@using AyushmanBharat.Common
+<div class="form-horizontal">
+
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Patient Detail</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+            <!-- /.box-tools -->
+        </div>
+
+        <div class="box-body pad">
+            @Html.HiddenFor(model => model.ClaimID)
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.CaseNumber)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.CaseNumber, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.BeneficiaryCode)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.BeneficiaryCode, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.BeneficiaryName)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.BeneficiaryName, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.FamilyCode)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.FamilyCode, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.PatientName)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.PatientName, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.Age)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.Age, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.Gender)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.Gender, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.PatientsHomeDistrict)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.PatientsHomeDistrict, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.PatientsHomeState)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.PatientsHomeState, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.PatientsContactNumber)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.PatientsContactNumber, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.Speciality)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.Speciality, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.PatientIPOrOP)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.PatientIPOrOP, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.ProcedureCode)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.ProcedureCode, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.MultipleProcedureCode)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.MultipleProcedureCode, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.ProcedureName)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.ProcedureName, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.MedicalOrSurgery)</strong>
+                </div>
+                <div class="col-md-8">
+                    @if (Model.MedicalOrSurgery == "M")
+                    {
+                        <p>Medical</p>
+                    }
+                    else if (Model.MedicalOrSurgery == "S")
+                    {
+                        <p>Surgery</p>
+                    }
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.IPRegistrationDate)</strong>
+                </div>
+                <div class="col-md-8">
+                    @if (Model.IPRegistrationDate != null)
+                    {
+                        @Html.DisplayFor(model => model.IPRegistrationDate, new { @class = "form-control" })
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Hospital</h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+            <!-- /.box-tools -->
+        </div>
+        <div class="box-body pad">
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.HospitalCode)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.HospitalCode, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.HospitalName)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.HospitalName, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.HospitalType)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.HospitalType, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.HospitalApplicationStatus)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.HospitalApplicationStatus, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.HospitalState)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.HospitalState, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.HospitalDistrict)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.HospitalDistrict, new { @class = "form-control" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Patient Admission Detail</h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+            <!-- /.box-tools -->
+        </div>
+        <div class="box-body pad">
+            <div class="clearfix"></div>
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.AdmissionDate)</strong>
+                </div>
+                <div class="col-md-8">
+                    @if (Model.AdmissionDate != null)
+                    {
+                        @Html.DisplayFor(model => model.AdmissionDate, new { @class = "form-control" })
+                    }
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.PreAuthInitiationDate)</strong>
+                </div>
+                <div class="col-md-8">
+                    @if (Model.PreAuthInitiationDate != null)
+                    {
+                        @Html.DisplayFor(model => model.PreAuthInitiationDate, new { @class = "form-control" })
+                    }
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.PreAuthInitiationAmount)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.PreAuthInitiationAmount, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.PreAuthCancelDate)</strong>
+                </div>
+                <div class="col-md-8">
+                    @if (Model.PreAuthCancelDate != null)
+                    {
+                        @Html.DisplayFor(model => model.PreAuthCancelDate, new { @class = "form-control" })
+                    }
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.PreAuthApprovalDate)</strong>
+                </div>
+                <div class="col-md-8">
+                    @if (Model.PreAuthApprovalDate != null)
+                    {
+                        @Html.DisplayFor(model => model.PreAuthApprovalDate, new { @class = "form-control" })
+                    }
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.PreAuthApprovalAmount)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.PreAuthApprovalAmount, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.PreAuthRejectionDate)</strong>
+                </div>
+                <div class="col-md-8">
+                    @if (Model.PreAuthRejectionDate != null)
+                    {
+                        @Html.DisplayFor(model => model.PreAuthRejectionDate, new { @class = "form-control" })
+                    }
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.EnhancementFlag)</strong>
+                </div>
+                <div class="col-md-8">
+                    @if (Model.EnhancementFlag == true)
+                    {
+                        <p>Yes</p>
+                    }
+                    else if (Model.EnhancementFlag == false)
+                    {
+                        <p>No</p>
+                    }
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.EnhancementApprovedAmount)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.EnhancementApprovedAmount, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.SurgeryDate)</strong>
+                </div>
+                <div class="col-md-8">
+                    @if (Model.SurgeryDate != null)
+                    {
+                        @Html.DisplayFor(model => model.SurgeryDate, new { @class = "form-control" })
+                    }
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.DischargeDate)</strong>
+                </div>
+                <div class="col-md-8">
+                    @if (Model.DischargeDate != null)
+                    {
+                        @Html.DisplayFor(model => model.DischargeDate, new { @class = "form-control" })
+                    }
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.DeathDate)</strong>
+                </div>
+                <div class="col-md-8">
+                    @if (Model.DeathDate != null)
+                    {
+                        @Html.DisplayFor(model => model.DeathDate, new { @class = "form-control" })
+                    }
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.ClaimRaisedDate)</strong>
+                </div>
+                <div class="col-md-8">
+                    @if (Model.ClaimRaisedDate != null)
+                    {
+                        @Html.DisplayFor(model => model.ClaimRaisedDate, new { @class = "form-control" })
+                    }
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.ClaimPaidDate)</strong>
+                </div>
+                <div class="col-md-8">
+                    @if (Model.ClaimPaidDate != null)
+                    {
+                        @Html.DisplayFor(model => model.ClaimPaidDate, new { @class = "form-control" })
+                    }
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.ClaimAmount)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.ClaimAmount, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.ClaimUTRNumber)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.ClaimUTRNumber, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.MaxOfIndex)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.MaxOfIndex, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-4">
+                    <strong>@Html.DisplayNameFor(model => model.ClaimStatus)</strong>
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.ClaimStatus, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <!--<div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Selected Flagging Rules</h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body pad">
+            <div class="clearfix"></div>
+            <div class="clearfix"></div>
+            <div class="form-group col-md-12 table-responsive">
+                <table class="table table-striped  table-responsive table-bordered dt-responsive nowrap" id="tblSelectedFlagRule">
+                    <thead>
+                        <tr>
+                            <th>Flagging Rules</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*@foreach (var item in Model.SelectedFlaggingRuleList)
+                        {
+                            <tr>
+                                <td>@item</td>
+                            </tr>
+                        }*@
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>-->
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Flagging Detail</h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+            <!-- /.box-tools -->
+        </div>
+        <div class="box-body pad">
+            <div class="clearfix"></div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-2">
+                    <strong>@Html.DisplayNameFor(model => model.FlaggingScore)</strong>
+                </div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.FlaggingScore, new { @class = "form-control" })
+                </div>
+            </div>
+            @*<div class="form-group col-md-6">
+                    <div class="col-md-2">
+                        <strong>@Html.DisplayNameFor(model => model.UploadStatus)</strong>
+                    </div>
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.UploadStatus, new { @class = "form-control" })
+                    </div>
+                </div>*@
+
+            <div class="clearfix"></div>
+            @*<div class="form-group col-md-12">
+                    <div class="col-md-2">
+                        <strong>@Html.DisplayNameFor(model => model.ErrorMessage)</strong>
+                    </div>
+                    <div class="col-md-10">
+                        <span class="red-square margin-r-5">Red - 2 point</span>
+                        <span class="amber-square margin-r-5">Amber - 1 point </span>
+                        <span class="green-square">Green - 0 point</span>
+                    </div>
+                </div>*@
+            <div class="form-group col-md-12 table-responsive">
+                <table class="table table-striped  table-responsive table-bordered dt-responsive nowrap" id="tblScore">
+                    <thead>
+                        <tr>
+                            <th>Flagging Rule</th>
+                            <th>Remark</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.FlaggingScoreList)
+                        {
+                            <tr>
+                                <td>@item.FlaggingRuleParameter</td>
+                                <td>@Html.Raw(item.Remarks)</td>
+                                <td>@item.Score</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    @if (!string.IsNullOrEmpty(Model.AuditorFinalStatus))
+    {
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">CheckList</h3>
+
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <!-- /.box-tools -->
+            </div>
+            <div class="box-body pad">
+                <div class="clearfix"></div>
+                @Html.HiddenFor(model => model.ClaimID, new { @id = "hdnClaimID" })
+
+                <div class="table-responsive">
+                    <table id="tblClaimQuestion" class="table table-striped  table-responsive table-bordered dt-responsive nowrap" cellspacing="0" style="width:100%"></table>
+                </div>
+            </div>
+        </div>
+            <div class="clearfix"></div>
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Audit Detail</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <div class="box-body pad">
+                    <div class="clearfix"></div>
+                    <div class="form-group col-md-6">
+                        <div class="col-md-4">
+                            <strong>@Html.Label("Auditor Status")</strong>
+                        </div>
+                        <div class="col-md-8">
+                            @if (Model.AuditorFinalStatus == AuditorFinalStatusEnum.Red.ToString())
+                            {
+                            <span class="red-square">Red</span>
+                            }
+                            else if (Model.AuditorFinalStatus == AuditorFinalStatusEnum.Green.ToString())
+                            {
+                            <span class="green-square">Green</span>
+                            }
+                            else if (Model.AuditorFinalStatus == AuditorFinalStatusEnum.Amber.ToString())
+                            {
+                            <span class="amber-square">Amber</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="col-md-4">
+                            <strong>@Html.Label("CheckList Status")</strong>
+                        </div>
+                        <div class="col-md-8">
+                            @if (Model.AuditorChecklistStatus == CheckListScoreEnum.Red.ToString())
+                            {
+                            <span class="red-square">Red</span>
+                            }
+                            else if (Model.AuditorChecklistStatus == CheckListScoreEnum.Green.ToString())
+                            {
+                            <span class="green-square">Green</span>
+                            }
+                            else if (Model.AuditorChecklistStatus == CheckListScoreEnum.Amber.ToString())
+                            {
+                            <span class="amber-square">Amber</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="form-group col-md-6">
+                        <div class="col-md-4">
+                            <strong>@Html.Label("Auditor Remark")</strong>
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DisplayFor(model => model.AuditorRemark)
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+    }
+</div>
+
+<script>
+
+    $(function () {
+        $("#tblSelectedFlagRule").DataTable();
+        $("#tblScore").DataTable();
+
+        var claimID = $("#hdnClaimID").val();
+
+        var table = $('#tblClaimQuestion').DataTable({
+            "processing": true, // for show progress bar
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            "pageLength": 10,
+            "ajax": {
+                "url": "/ClaimCheckListQuestion/ViewQuestion",
+                "type": "POST",
+                "datatype": "json",
+                "data": { id: claimID }
+            },
+            "columnDefs":
+                [
+                    { "targets": 4, "width": "9%" },
+                    { "targets": 5, "width": "16%" }
+                ],
+            aaSorting: [[0, 'asc']],
+            dom: '<lf<t>ip>',
+            "columns": [
+                       { "data": "Sequence", "visible": false, "searchable": false },
+                       { "data": "CheckListQuestionID", "visible": false, "searchable": false },
+                       //{ "data": "PackageID", "visible": false, "searchable": false },
+                       { "title": "Question", "data": "Question", "autoWidth": true },
+                       { "title": "Expected Answer", "data": "ExpectedAnswer", "autoWidth": true, "visible": false, "searchable": false },
+                       { "title": "Selected Answer", "data": "Answer", "autoWidth": true, },
+                       { "title": "Source", "data": "Source", "autoWidth": true, "visible": false, "searchable": false },
+                       {
+                           "title": "Report Remarks", "data": "ReportRemarks", "autoWidth": true, "searchable": false,
+                           "render": function (data, type, row, meta) {
+                               if (row.ExpectedAnswer !== row.Answer) {
+                                   return row.ReportRemarks;
+                               }
+                               else {
+                                   return "";
+                               }
+                           }
+                       },
+            ]
+        });
+    });
+</script>

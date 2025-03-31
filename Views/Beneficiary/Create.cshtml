@@ -1,0 +1,327 @@
+﻿@model AyushmanBharat.Models.ViewModels.BeneficiaryVM
+
+@{
+    ViewBag.Title = "Policy Holder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var method = "Create";
+    if (ViewBag.IsEditPage != null)
+    {
+        method = "Edit";
+    }
+}
+
+<section class="content-header">
+    <h1>
+
+        @method  Policy Holder
+    </h1>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+        @using (Html.BeginForm(method, "Beneficiary", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.BeneficiaryID)
+        
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Policy Holder Details</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+                    <div class="box-body pad">
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.BeneficiaryName, new { @class = "col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.BeneficiaryName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Policy Holder Name", @title = "Enter Policy Holder Name." } })
+                                @Html.ValidationMessageFor(m => m.BeneficiaryName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.BeneficiaryGender, new { @class = "col-md-4" })
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(t => t.BeneficiaryGender, new List<SelectListItem>
+
+                 {
+                    new SelectListItem{ Text="All", Value = "N" }, /*As protocol has Gender which saves NoGenderSpecific as 'N'. So using same, which is required for comparing in flagging Rule(Added By Sujashree)*/
+                    new SelectListItem{ Text="Male", Value = "Male" },
+                    new SelectListItem{ Text="Female", Value = "Female" },                    
+                 }, htmlAttributes: new { @class = "form-control", @title = "Select Gender" })
+                                @Html.ValidationMessageFor(m => m.BeneficiaryGender, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                       
+
+                        <div class="clearfix"></div>
+                      
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.BeneficiaryAge, new { @class = "col-md-4 required" })
+                            <div class="col-md-8">
+                                    @Html.EditorFor(model => model.BeneficiaryAge, new { htmlAttributes = new { @class = "form-control", @placeholder = "Policy Holder Age", @title = "Enter Policy Holder Age." } })
+                                @Html.ValidationMessageFor(m => m.BeneficiaryAge, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.InsuranceValidityDate, new { @class = "col-md-4 required" })
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.InsuranceValidityDateString, new { @class = "form-control", @title = "Enter Insuranc Validity Date", @placeHolder = "Insuranc Validity Date", @id = "txtInsurancValidityDate", @type = "text", @autocomplete = "off" })
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.InsuranceValidityDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                      
+
+                        <div class="clearfix"></div>
+
+                        
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.BeneficiaryRenewalCode, new { @class = "col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.BeneficiaryRenewalCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Policy Holder Renewal Code", @title = "Enter Policy Holder Renewal Code." } })
+                                @Html.ValidationMessageFor(m => m.BeneficiaryRenewalCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.BeneficiaryRenewalID, new { @class = "col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.BeneficiaryRenewalID, new { htmlAttributes = new { @class = "form-control", @placeholder = "Policy Holder Renewal ID", @title = "Enter Policy Holder Renewal ID" } })
+                                @Html.ValidationMessageFor(m => m.BeneficiaryRenewalID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                       
+                        
+
+                        <div class="clearfix"></div>
+                        
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.BeneficiaryCode, new { @class = "col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.BeneficiaryCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Policy Holder Code", @title = "Enter Policy Holder Code." } })
+                                @Html.ValidationMessageFor(m => m.BeneficiaryCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.BeneficiaryFamilyCode, new { @class = "col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.BeneficiaryFamilyCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Policy Holder Family Code", @title = "Enter Policy Holder Family Code." } })
+                                @Html.ValidationMessageFor(m => m.BeneficiaryFamilyCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                         <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.InsuranceCompanyID, "Insurance Company", new { @class = "col-md-4 required" })
+                            <div class="col-md-8">
+                                @if (ViewBag.InsuranceCompanyID != null)
+                                {                                    
+                                    @Html.DropDownListFor(t => t.InsuranceCompanyID, null, "--Select Insurance Company--", htmlAttributes: new { @class = "form-control", @title = "Select Insurance Company" })
+                                    @Html.ValidationMessageFor(model => model.InsuranceCompanyID, "", new { @class = "text-danger" })
+                                }
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Policy Holder Contact Details</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+                    <div class="box-body pad">
+                        <div class="clearfix"></div>
+                     
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.BeneficiaryContactNo, new { @class = "col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.BeneficiaryContactNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Policy Holder Contact No", @title = "Enter Policy Holder ContactNo." } })
+                                @Html.ValidationMessageFor(m => m.BeneficiaryContactNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.BeneficiaryLandlineNumber, new { @class = "col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.BeneficiaryLandlineNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Policy Holder Landline Number", @title = "Enter Policy Holder Landline Number." } })
+                                @Html.ValidationMessageFor(m => m.BeneficiaryLandlineNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>                                             
+                      
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.StateID, "State", new { @class = "col-md-4 required" })
+                            <div class="col-md-8">
+                                @if (ViewBag.StateID != null)
+                                {
+                                    @Html.DropDownListFor(t => t.StateID, null, "--Select State--", htmlAttributes: new {@id="ddState", @class = "form-control", @title = "Select State" })
+                                    @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
+                                }
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.DistrictID, "District", new { @class = "col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(t => t.DistrictID, Model.DistrictList, "--Select District--", htmlAttributes: new { @class = "form-control", @title = "Select District" })
+                                @Html.ValidationMessageFor(model => model.DistrictID, "", new { @class = "text-danger" })
+                                @*@if (ViewBag.DistrictID != null)
+                                {
+                                    if (method == "Edit")
+                                    {
+                                    @Html.DropDownListFor(t => t.DistrictID, null, "--Select District--", htmlAttributes: new { @class = "form-control", @title = "Select District" })
+                                        @Html.ValidationMessageFor(model => model.DistrictID, "", new { @class = "text-danger" })
+                                    }
+                                    else
+                                    {
+                                    @Html.DropDownListFor(x => x.DistrictID, new List<SelectListItem>(), "--Select District--", new { @class = "form-control", @title = "Select District", @id = "DistrictID" })
+                                    @Html.ValidationMessageFor(model => model.DistrictID, "", new { @class = "text-danger" })
+                                    }
+                                }*@
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>                     
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.BlockName, new { @class = "col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.BlockName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Block Name", @title = "Enter Block Name." } })
+                                @Html.ValidationMessageFor(m => m.BlockName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.TalukaName, new { @class = "col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.TalukaName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Location Name", @title = "Enter Location Name." } })
+                                @Html.ValidationMessageFor(m => m.TalukaName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.BeneficiaryLocality, new { @class = "col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.BeneficiaryLocality, new { htmlAttributes = new { @class = "form-control", @placeholder = "Locality", @title = "Enter Locality." } })
+                                @Html.ValidationMessageFor(m => m.BeneficiaryLocality, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.BeneficiaryLandmark, new { @class = "col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.BeneficiaryLandmark, new { htmlAttributes = new { @class = "form-control", @placeholder = "Landmark", @title = "Enter Landmark." } })
+                                @Html.ValidationMessageFor(m => m.BeneficiaryLandmark, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.PinCode, new { @class = "col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.PinCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Pin Code", @title = "Enter Pin Code." } })
+                                @Html.ValidationMessageFor(m => m.PinCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.BeneficiaryAddress, new { @class = "col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.BeneficiaryAddress, new { htmlAttributes = new { @class = "form-control", @placeholder = "Address", @title = "Enter Address." } })
+                                @Html.ValidationMessageFor(m => m.BeneficiaryAddress, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+
+                <div class="form-group col-md-12">
+                    <center>
+                        @if (method == "Edit")
+                        {
+                            <input type="submit" class="btn btn-success" value="Update" title="Updatte" />
+                            <input type="reset" class="btn btn-warning" value="Revert" title="Revert" />
+                        }
+                        else
+                        {
+                            <input type="submit" class="btn btn-success" value="Save" title="Save" />
+                            <input type="reset" class="btn btn-warning" value="Cancel" title="Cancel" />
+                        }
+
+                        <a class="btn btn-info" title="Back To List" href="@Url.Action("Index","Beneficiary" )"> Back To List</a>
+                    </center>
+                </div>
+
+            </div>
+        }
+                      
+        </div>
+    </div>
+</section>
+<script>
+    $(function () {
+
+        //$("#txtBeneficiaryDateBirth").datepicker({
+        //    format: 'dd-M-yyyy',
+        //    autoclose: true,
+        //    orientation: "bottom",
+        //});
+
+        $("#txtInsurancValidityDate").datepicker({
+            format: 'dd-M-yyyy',
+            autoclose: true,
+            orientation: "bottom",
+        });
+
+        $('#tblGeneric').dataTable({
+            order: [],
+            stateSave: true,
+            columnDefs: [{ orderable: false, targets: [2] }]
+        });
+    });
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#ddState').change(function () {
+            $.ajax({
+                type: "post",
+                url: "/Beneficiary/GetDistrict",
+                data: { stateId: $('#ddState').val() },
+                datatype: "json",
+                traditional: true,
+                success: function (data) {                    
+                    var district = "<select id='DistrictID'>";
+                    district = district + '<option value="">--Select District--</option>';
+                    for (var i = 0; i < data.length; i++)
+                    {
+                        district = district + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
+                    }
+                    district = district + '</select>';
+                    $('#DistrictID').html(district);
+                }
+            });
+        });
+    });
+</script>  
+
+

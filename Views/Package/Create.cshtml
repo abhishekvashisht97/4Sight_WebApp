@@ -1,0 +1,459 @@
+﻿@model AyushmanBharat.Models.ViewModels.PackageVM
+
+@{
+    ViewBag.Title = "Package";
+    var method = "Create";
+    if (ViewBag.IsEditPage != null)
+    {
+        method = "Edit";
+    }
+}
+
+<section class="content-header">
+    <h1>
+        Package <small class="text-muted"><b class="headerTitle">Protocol - </b>@Model.ProtocolName</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="@Url.Action("Index","Protocol")">Protocol</a></li>
+        <li><a href="@Url.Action("Index","Package",new { id = Model.ProtocolID})">Package</a></li>
+        <li class="active">@method</li>
+    </ol>
+</section>
+
+<section class="content">
+    @using (Html.BeginForm(method, "Package", FormMethod.Post, new { id = "frmPackage" }))
+            {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Package</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                            <!-- /.box-tools -->
+                        </div>
+
+                        <div class="box-body pad">
+                            @Html.HiddenFor(model => model.ProtocolID)
+                            @Html.HiddenFor(model => model.PackageID)
+                            @Html.HiddenFor(model => model.ProtocolCode)
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.ProtocolCode, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.DisplayFor(model => model.ProtocolCode)
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.PackageCode, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.PackageCode, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PackageCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.ProcedureCode, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.ProcedureCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @*@Html.ValidationMessageFor(model => model.ProcedureCode, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.ProcedureName, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.ProcedureName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ProcedureName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label col-md-4">Rate (&#x20b9;)</label>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.ICDCode, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.ICDCode, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ICDCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.StateID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(model => model.StateID, Model.StateList, "--Select State--", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            @*<div class="form-group col-md-6">
+                                    @Html.LabelFor(model => model.InsuranceCompanyID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(model => model.InsuranceCompanyID, Model.InsuranceCompanyList, "--Select Insurance Company--", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.InsuranceCompanyID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.ClassificationOfPackage, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.ClassificationOfPackage, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ClassificationOfPackage, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.InchesLOS, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.InchesLOS, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.InchesLOS, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            @*<div class="form-group col-md-6">
+                                    @Html.LabelFor(model => model.InsurerAge, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.InsurerAge, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.InsurerAge, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
+
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.ABLOS, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.ABLOS, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ABLOS, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.InsurerLOS, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.InsurerLOS, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.InsurerLOS, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                        </div>
+                    </div>
+                    @*End OF Ayushman Package*@
+
+                    <div class="clearfix"></div>
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Insurer</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                            <!-- /.box-tools -->
+                        </div>
+                        <div class="box-body pad">
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.GovtReservedProcedure, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                                <div class="col-md-8">
+                                    @Html.CheckBoxFor(model => model.GovtReservedProcedure)
+                                    @Html.ValidationMessageFor(model => model.GovtReservedProcedure, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.MedicalorSurgical, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                                <div class="col-md-8">
+                                    @Html.RadioButtonFor(m => m.MedicalorSurgical, 'M')<span>Medical</span> &nbsp; &nbsp; &nbsp;
+                                    @Html.RadioButtonFor(m => m.MedicalorSurgical, 'S')<span>Surgical</span>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.MedicalorSurgical, "", new { @class = "text-danger" })
+                                </div>
+
+                                @*<div class="col-md-8">
+                                        @if (method == "Edit")
+                                        {
+                                            if (Model.MedicalorSurgical.ToUpper() == "MEDICAL")
+                                            {
+                                            @Html.RadioButtonFor(x => x.MedicalorSurgical, "M", new { @checked = "true" })<span>Medical</span>
+                                            @Html.RadioButtonFor(x => x.MedicalorSurgical, "S")<span>Surgical</span>
+
+                                            }
+                                            else if (Model.MedicalorSurgical.ToUpper() == "SURGICAL")
+                                            {
+                                            @Html.RadioButtonFor(x => x.MedicalorSurgical, "M")<span>Medical</span>
+                                            @Html.RadioButtonFor(x => x.MedicalorSurgical, "S", new { @checked = "true" })<span>Surgical</span>
+
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                        @Html.RadioButtonFor(m => m.MedicalorSurgical, 'M')<span>Medical</span>
+                                        @Html.RadioButtonFor(m => m.MedicalorSurgical, 'S')<span>Surgical</span>
+                                        }
+                                        <br />
+                                        @Html.ValidationMessageFor(model => model.MedicalorSurgical, "", new { @class = "text-danger" })
+                                    </div>*@
+                            </div>
+                        </div>
+                    </div>
+                    @*End Of Insurer*@
+
+                    <div class="clearfix"></div>
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">INCHES</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                            <!-- /.box-tools -->
+                        </div>
+                        <div class="box-body pad">
+
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.CommonalityOfOccurenceID, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(model => model.CommonalityOfOccurenceID, Model.CommonalityOfOccurenceList, "--Select Commonality Of Occurence--", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CommonalityOfOccurenceID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.FraudPotential, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(model => model.FraudPotential, new List<SelectListItem>
+                               {
+                                   new SelectListItem {Text = "0", Value="0" },
+                                   new SelectListItem {Text = "1", Value="1" },
+                                   new SelectListItem {Text = "2", Value="2" },
+                                   new SelectListItem {Text = "3", Value="3" },
+                                   new SelectListItem {Text = "4", Value="4" },
+                                   new SelectListItem {Text = "5", Value="5" },
+                               }, "--Select Fraud Potential--", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.FraudPotential, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.MinimumNumberofDaysAdmission, htmlAttributes: new { @class = "control-label col-md-4", @type = "text" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.MinimumNumberofDaysAdmission, new { htmlAttributes = new { @class = "form-control", @maxlength = "1", @min = 1, @max = 8 } })
+                                    @Html.ValidationMessageFor(model => model.MinimumNumberofDaysAdmission, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.FacilityTypeID, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(model => model.FacilityTypeID, Model.FacilityTypeList, "--Select Facility Type--", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.FacilityTypeID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.GenderSpecific, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                                <div class="col-md-8">
+                                    @Html.RadioButtonFor(m => m.GenderSpecific, 'Y')<span>Yes</span> &nbsp; &nbsp; &nbsp;
+                                    @Html.RadioButtonFor(m => m.GenderSpecific, 'N')<span>No</span>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.GenderSpecific, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="dvGender form-group col-md-6 hidden">
+                                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(model => model.Gender, Model.GenderList, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.AgeSpecific, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                                <div class="col-md-8">
+                                    @Html.RadioButtonFor(m => m.AgeSpecific, 'Y')<span>Yes</span> &nbsp; &nbsp; &nbsp;
+                                    @Html.RadioButtonFor(m => m.AgeSpecific, 'N')<span>No</span>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.AgeSpecific, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="dvAge form-group col-md-6 hidden">
+                                @Html.LabelFor(model => model.FromAge, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.FromAge, new { htmlAttributes = new { @class = "form-control", @maxlength = "3", @min = 0, @max = 199 } })
+                                    @Html.ValidationMessageFor(model => model.FromAge, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.ToAge, htmlAttributes: new { @class = "control-label col-md-2 required" })
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.ToAge, new { htmlAttributes = new { @class = "form-control", @maxlength = "3", @min = 1, @max = 200 } })
+                                    @Html.ValidationMessageFor(model => model.ToAge, "", new { @class = "text-danger" })
+                                </div>
+                                <br />
+                                <center>
+                                    <span class="text-danger" id="spnAge"></span>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    @*End OF Inchecs*@
+
+                    <div class="clearfix"></div>
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.LOSRemarks, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.LOSRemarks, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.LOSRemarks, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.AuditorCommentAboutPreAuth, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.AuditorCommentAboutPreAuth, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.AuditorCommentAboutPreAuth, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.AuditorCommentAboutSettlement, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.AuditorCommentAboutSettlement, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.AuditorCommentAboutSettlement, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="form-group col-md-12">
+                        <center>
+                            @if (method == "Edit")
+                            {
+                                @Html.HiddenFor(m => m.CreatedByID)
+                                @Html.HiddenFor(m => m.CreatedOn)
+                                <input type="submit" class="btn btn-success" value="Update" id="btnSave" title="Update" />
+                                <input type="reset" class="btn btn-warning" value="Revert" title="Revert" />
+                            }
+                            else
+                            {
+                                <input type="submit" class="btn btn-success" value="Save" id="btnSave" title="Save" />
+                                <input type="reset" class="btn btn-warning" value="Cancel" title="Cancel" />
+                            }
+
+                            <a class="btn btn-info" title="Back To List" href="@Url.Action("Index", "Package", new { id = Model.ProtocolID })"> Back To List</a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+<script>
+    $(function () {
+
+        $("#PackageCode").change(function () {
+            var protocolCode = $("#ProtocolCode").val();
+            var packageCode = $("#PackageCode").val();
+            $("#ProcedureCode").val(protocolCode + packageCode);
+        });
+
+        var isValid = true;
+        getGender($("#GenderSpecific:checked").val());
+        getAge($("#AgeSpecific:checked").val());
+
+        $("input[name='GenderSpecific']:radio").click(function () {
+            getGender(this.value);
+        });
+
+        $("input[name='AgeSpecific']:radio").click(function () {
+            getAge(this.value);
+        });
+
+        $("#FromAge").change(function () {
+            validateAge();
+        });
+
+        $("#ToAge").change(function () {
+            validateAge();
+        });
+
+        $("#btnSave").click(function (e) {
+            validateAge();
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
+
+        function validateAge() {
+            isValid = true;
+            var AgeSpecific = $("#AgeSpecific:checked").val();
+            var FromAge = $("#FromAge").val();
+            var ToAge = $("#ToAge").val();
+            if (AgeSpecific == 'Y') {
+                if (!FromAge || !ToAge) {
+                    isValid = false;
+                    $("#spnAge").text("FromAge and ToAge is required.");
+                }
+                else if (parseInt(ToAge) < parseInt(FromAge)) {
+                    //if value exists
+                    isValid = false;
+                    $("#spnAge").text("ToAge should be greater than FromAge.");
+                }
+                else {
+                    $("#spnAge").text("");
+                }
+            }
+            else {
+                $("#spnAge").text("");
+            }
+        }
+    });
+
+    function getGender(genderSpecific) {
+        if (genderSpecific == 'N') {
+            $(".dvGender").addClass("hidden");
+        }
+        else if (genderSpecific == 'Y') {
+            $(".dvGender").removeClass("hidden");
+        }
+    }
+
+    function getAge(ageSpecific) {
+        if (ageSpecific == 'N') {
+            $(".dvAge").addClass("hidden");
+        }
+        else if (ageSpecific == 'Y') {
+            $(".dvAge").removeClass("hidden");
+        }
+    }
+</script>

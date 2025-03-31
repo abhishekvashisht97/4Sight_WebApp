@@ -1,0 +1,207 @@
+﻿@model AyushmanBharat.Models.ViewModels.ProtocolVM
+
+@{
+ViewBag.Title = "Protocol";
+}
+
+<section class="content-header">
+    <h1>
+        Protocol
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i> Home</a></li>       
+        <li class="active">Protocol</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body pad">
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <a href="@Url.Action("Create","Protocol")" class="btn btn-primary margin-l-m15"><span class="fa fa-plus-square">&nbsp;</span>Add New</a>
+
+                            @*<a id="lnkPackageExportToExcel" href="#" class="btn btn-success">
+                                    <i class="fa fa-upload"></i>
+                                    Export To Excel
+                                </a>*@
+
+                            <a title="Download Template" href="@Url.Action("Download","Document",new { FilePath = "~/Uploads/Template/ProtocolTemplate.xlsx" })" class="btn btn-warning" download>
+                                <i class="fa fa-download"></i>
+                                Template
+                            </a>
+
+                            <div class="pull-right margin-r-m15">
+                                <input id="fileImport" type="file" class="filestyle" data-input="false">
+
+                                <button type="button" class="btn btn-info" title="Import selected file" id="btnImport" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing Import">
+                                    <i class="fa fa-upload"></i>
+                                    Import
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr />
+
+                    <div class="clearfix"></div>
+                    <div class="form-group hidden" id="dvError">
+                        <p class="d-inline bg-danger"><b>Following rows are not imported.</b></p> 
+                        <div id="dvTableError"></div>
+                        <hr />                     
+                    </div>
+                    <div class="form-group">
+                        <table id="tblProtocol" class="table table-striped  table-responsive table-bordered dt-responsive nowrap" cellspacing="0"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(function () {
+
+        $('#tblProtocol').DataTable({
+            "lengthMenu": [[10, 25, 50, 100, 1000], [10, 25, 50, 100, 1000]],
+            "processing": true, // for show progress bar
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            "pageLength": 10,
+            "stateSave": true,
+            "ajax": {
+                "url": "/Protocol/LoadProtocols",
+                "type": "POST",
+                "datatype": "json",
+            },
+            "columnDefs":
+                [
+                    { "targets": 0, "visible": false, "searchable": false, "orderable": false },
+                    { "targets": 3, "width": "18%" }
+                ],
+            aaSorting: [[1, 'asc']],
+            "columns": [
+                      { "title": "ProtocolID", "data": "ProtocolID", "visible": false, "searchable": false },
+                      { "title": "Code", "data": "ProtocolCode", "autoWidth": true, "className": "text-right" },
+                      { "title": "Name", "data": "ProtocolName", "autoWidth": true },
+                      {
+                          "title": "Action",
+                          "data": "ProtocolID",
+                          "searchable": false,
+                          "sortable": false,                          
+                          "render": function (data, type, row, meta) {
+                              var strURL = '<a href="@Url.Action("Edit", "Protocol")?id=' + row.ProtocolID + '" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a> | ';
+                              strURL = strURL + '<a href="#"  onclick="DeleteProtocol(\'' + row.ProtocolID + '\',\'' + row.ProtocolCode + '\');" title="Delete"><span class="glyphicon glyphicon-trash text-danger"></span></a> | ';
+                              strURL = strURL + '<a href="@Url.Action("Index", "Package")?id=' + row.ProtocolID + '" title="Package" class ="btn btn-datatable btn-primary"><span class="fa  fa-clone"></span> Package <span title="" class="badge bg-yellow">' + row.PackageCount + '</span></a>  ';
+                              return strURL;
+                          }
+                      }
+            ],
+            dom: 'lBfrtip',             
+            buttons: [
+          {
+              extend: 'excelHtml5',
+              text: ' <i class="fa fa-download"></i> Export To Excel',
+              className: 'btn btn-success',
+              titleAttr: 'Export to Excel',
+              title: 'Protocol',
+              messageTop: 'Excel.',
+              exportOptions: {
+                  modifier: {
+                      page: 'all',
+                      //search: 'none'
+                  },
+                  columns: [1, 2]
+              },
+              init: function (api, node, config) {
+                  $(node).removeClass('dt-button buttons-excel buttons-html5');
+              },
+              footer: true
+          }],
+        });
+
+        //////////////////Import And Export Excel///////////////////////////////
+        @*$('#lnkPackageExportToExcel').click(function () {
+            var dataLength = $('#tblPackage').DataTable().rows().data().length;
+            if (dataLength > 0) {
+                var url = "@Html.Raw(Url.Action("ExportToExcel", "Package"))";
+                ExportToExcel(url);
+            }
+            else {
+                displaySuccessNotification("No records found to export.");
+            }
+        });*@
+
+        $("#fileImport").change(function () {
+            validateExcelFile('fileImport');
+        });
+
+        $("#btnImport").click(function () {
+            var file = $("#fileImport").val();
+            if (file != "") {
+                var excelFile = document.getElementById("fileImport").files[0];
+                var formData = new FormData();
+                formData.append("file", excelFile);
+                var url = '@Url.Action("ImportFromExcel", "Protocol")';
+                ImportExcelFile(url, formData, "tblProtocol");
+            }
+            else {
+                displayErrorNotification("Please choose file to upload.");
+            }
+        });
+        ///////////////////////////////////////////////////////////////////////////
+    });
+
+    function DeleteProtocol(id, ProtocolCode) {
+        BootstrapDialog.show({
+            title: "Confirm Box",
+            message: "Are you sure to delete record? " + ProtocolCode,
+            buttons: [{
+                label: 'OK',
+                cssClass: 'btn-primary',
+                icon: "glyphicon glyphicon-check",
+                action: function (dialogItself) {
+                    $.ajax({
+                        url: "@Html.Raw(Url.Action("Delete", "Protocol"))",
+                        type: "GET",
+                        data: { ProtocolID: id },
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response == "OK") {
+
+                                //Refresh Ur Table Here
+                                $('#tblProtocol').DataTable().ajax.reload();
+                                dialogItself.close();
+                                displaySuccessNotification(ProtocolCode + " Deleted Successfully.");
+                            }
+                            else if (response == "Conflict") {
+                                dialogItself.close();
+                                displayErrorNotification("Cannot delete record. Its been used in another masters.");
+                            }
+                            else {
+                                dialogItself.close();
+                                displayErrorNotification("Something Went Wrong.");
+                            }
+                        },
+                        error: function (request, status, error) {
+                            dialogItself.close();
+                            dialogItself.close();
+                            displayErrorNotification("Sorry, An error occured while processing your request.");
+                        }
+                    });
+                }
+            },
+    {
+        label: 'No',
+        cssClass: 'btn-warning',
+        icon: 'fa fa-times',
+        action: function (dialogItself) {
+            dialogItself.close();
+        }
+    }]
+        });
+    }
+</script>

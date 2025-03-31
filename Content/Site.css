@@ -1,0 +1,354 @@
+﻿@charset "UTF-8";
+
+body {
+    padding-bottom: 20px;
+}
+
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*input,
+select,
+textarea {
+    max-width: 280px;
+}*/
+
+.container {
+    width: 100% !important;
+}
+
+.login.content-wrapper {
+    margin: 0px !important;
+}
+
+.margin-top-15 {
+    margin-top: 15px;
+}
+
+.input-group {
+    padding-bottom: 15px;
+}
+
+.login-box {
+    box-shadow: 0 0 30px black;
+}
+
+.info-box {
+    padding: 15px 15px;
+}
+
+#tblScore_paginate {
+    margin-top: 2px !important;
+}
+
+#tblSelectedFlagRule_paginate {
+    margin-top: 2px !important;
+}
+
+#notifications {
+    padding: 3px 15px 0px 15px;
+}
+
+th {
+    background-color: #D6DFFF;
+}
+
+table.dataTable thead .sorting:after {
+    opacity: 0.7;
+    content: "\e150";
+    font-size: 13px;
+}
+
+table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 2px 5px;
+}
+
+.dropdown-menu {
+    min-width: 0px;
+}
+
+.navbar-nav > .user-menu > .dropdown-menu.ulLogout {
+    width: auto;
+}
+
+.displayTable > tbody > tr > td {
+    padding: 10px 5px;
+}
+
+table {
+    width: 100% !important;
+}
+
+.table-danger {
+    background-color: #f5c6cb;
+}
+
+.margin-lr-m15 {
+    margin: 0px -15px !important;
+}
+
+.btn-datatable {
+    padding: 0px 8px !important;
+}
+
+.btn {
+    display: inline-block;
+    padding: 4px 10px;
+}
+
+div.dataTables_paginate {
+    margin-top: -28px;
+}
+
+
+.pagination > li > a, .pagination > li > span {
+    padding: 3px 12px;
+}
+
+.dt-buttons {
+    float: right !important;
+    padding-left: 5px !important;
+}
+
+#tblClaim_wrapper .dt-buttons {
+    /*float:left !important;*/
+    position: absolute;
+    margin-left: 15%;
+}
+
+.btn-deSelectPage {
+    margin-left: 2px;
+}
+
+.dataTables_length {
+    /*width: 20%;*/
+    margin-bottom: -3%;
+}
+
+.margin-l-m15 {
+    margin-left: -15px;
+}
+
+.margin-r-m15 {
+    margin-right: -15px;
+}
+
+.hrline {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.tblBack {
+    position: absolute;
+}
+
+.content-header > h1 > small {
+    font-weight: 600 !important;
+}
+
+.login-header {
+    background: steelblue;
+    padding: 1px;
+    color: white;
+}
+
+.login-box-body, .register-box-body {
+    background: aliceblue;
+}
+
+.required:after {
+    content: "*";
+    font-weight: bold;
+    color: red;
+}
+
+.bootstrap-filestyle {
+    display: inline !important;
+}
+
+.elevation-3 {
+    box-shadow: 0 10px 20px rgba(0,0,0,.19), 0 6px 6px rgba(0,0,0,.23);
+}
+
+.brand-image {
+    float: left;
+    max-height: 42px;
+    width: auto;
+    margin-left: -7px;
+    margin-top: 3px;
+}
+
+.brand-lg-image {
+    float: left;
+    max-height: 42px;
+    width: auto;
+    /*margin-left: -33px;*/
+    margin-top: 3px;
+}
+
+.logo-header-Text {
+    margin-left: -22px;
+}
+
+.main-header .logo {
+    font-size: 19px;
+}
+
+.dataTables_filter {
+    margin-top: 2px;
+}
+
+.underline {
+    border-bottom: 1px solid #8aa4af;
+}
+
+table.dataTable tbody tr.selected {
+    background-color: #B0BED9;
+}
+
+tr.even:hover, tr.odd:hover {
+    background-color: #e6ebff;
+}
+/*.navbar-nav > .user-menu > .dropdown-menu {
+    width: 200px;
+}*/
+
+.error-box {
+    border-color: red;
+}
+
+.dvQuestion.table-responsive {
+    overflow-x: hidden !important;
+}
+
+.navbar-nav > .user-menu > .dropdown-menu > .user-body {
+    padding: 10px;
+}
+
+#tblError_wrapper div.dataTables_paginate {
+    margin-top: 0px !important;
+}
+
+.headerTitle {
+    color: steelblue;
+}
+
+/*#tblClaim {
+    margin-top: 14px !important;
+}
+
+#tblClaim_filter > label
+{
+    margin-top: 5px !important;
+}*/
+.red-square {
+    background-color: #FA8072;
+    text-align: center;
+    padding: 5px;
+}
+
+.green-square {
+    background-color: #3CB371;
+    text-align: center;
+    padding: 5px;
+}
+
+.amber-square {
+    background-color: #ffbf00;
+    text-align: center;
+    padding: 5px;
+}
+
+.red-dot {
+    height: 25px;
+    width: 25px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+#dvClaimModal > .modal-dialog {
+    width: 80%;
+}
+
+.skin-blue .main-header .logo {
+    background-color: #c2e2f5 !important;
+}
+/*form Loader*/
+.no-js #loader {
+    display: none;
+}
+
+.js #loader {
+    display: block;
+    position: absolute;
+    left: 100px;
+    top: 0;
+}
+
+.se-pre-con {
+    display: none;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url(images/Preloader_2.gif) center no-repeat #fff;
+    opacity: 0.4;
+}
+
+div.dataTables_processing {
+    background-color: black;
+    background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(118, 145, 193, 0.9) 25%, rgba(217, 203, 234, 0.9) 75%, rgba(255,255,255,0) 100%);
+    z-index: 1;
+}
+
+#tblInsurer_wrapper .pagination, 
+#tblDiagnostic_wrapper .pagination, 
+#tblFraudulent_wrapper .pagination, 
+#tblTriggers_wrapper .pagination,
+#tblIncomeStrata_wrapper .pagination, 
+#tblIndustry_wrapper .pagination, 
+#tblGauge_wrapper .pagination,
+#tblAgentPhase_wrapper .pagination,
+#tblPolicy_wrapper .pagination,
+#tblPolicyDuration_wrapper .pagination,
+#tblRiskQuotient_wrapper .pagination
+{
+    margin-top:30px;
+}
+
+@media (max-width: 991px) {
+    .navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
+        right: 1%;
+    }
+
+    .dataTables_length {
+        margin-bottom: 1%;
+    }
+
+    .pull-right {
+        display: inline-block;
+    }
+}

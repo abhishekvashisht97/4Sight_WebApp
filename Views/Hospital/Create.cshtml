@@ -1,0 +1,344 @@
+﻿@model AyushmanBharat.Models.ViewModels.HospitalVM
+
+@{
+    ViewBag.Title = "Hospital";
+    var method = "Create";
+    if (ViewBag.IsEditPage != null)
+    {
+        method = "Edit";
+    }
+}
+
+<section class="content-header">
+    <h1>
+       @method  Hospital<small class="text-muted"><b class="headerTitle">State - </b> @Model.StateName</small>
+    </h1>
+</section>
+
+<section class="content">
+    @using (Html.BeginForm(method, "Hospital", FormMethod.Post, new { id = "frmHospital" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @Html.HiddenFor(model => model.HospitalID)
+                @Html.HiddenFor(model => model.StateID)
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Hospital</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+
+                    <div class="box-body pad">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.HospitalName, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.HospitalName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.HospitalName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.HospitalCode, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.HospitalCode, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.HospitalCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.HospitalType, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.RadioButtonFor(m => m.HospitalType, "Public")<span>Public</span> &nbsp; &nbsp; &nbsp;
+                                @Html.RadioButtonFor(m => m.HospitalType, "Private")<span>Private</span>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.HospitalType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.ContactPerson, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.ContactPerson, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ContactPerson, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Location Detail</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+
+                    <div class="box-body pad">
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.DistrictID, "District", htmlAttributes: new { @class = "control-label col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(model => model.DistrictID, Model.DistrictList, "--Select District--", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DistrictID, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.TalukaName, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.TalukaName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TalukaName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Locality, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Locality, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Locality, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Landmark, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Landmark, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Landmark, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.PinCode, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.PinCode, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PinCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Latitude, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Altitude, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Altitude, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Altitude, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Longitude, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.EmpaneledStatus, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.EmpaneledStatus, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.EmpaneledStatus, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Info</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+
+                    <div class="box-body pad">
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.FacilityTypeID, "Facility Type", htmlAttributes: new { @class = "control-label col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(model => model.FacilityTypeID, Model.FacilityTypeList, "--Select Facility Type--", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FacilityTypeID, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.BlockName, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.BlockName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BlockName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.OT, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.CheckBoxFor(model => model.OT)
+                                @*@Html.DropDownListFor(modelItem => modelItem.OT, (new[] { new SelectListItem { Text = "Yes", Value = "Yes" }, new SelectListItem { Text = "No", Value = "No" } }), new { @class = "form-control" })*@
+                                @Html.ValidationMessageFor(model => model.OT, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.ICU, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.CheckBoxFor(model => model.ICU)
+                                @*@Html.DropDownListFor(modelItem => modelItem.ICU, (new[] { new SelectListItem { Text = "Yes", Value = "Yes" }, new SelectListItem { Text = "No", Value = "No" } }), new { @class = "form-control" })*@
+                                @Html.ValidationMessageFor(model => model.ICU, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(t => t.Rating, new List<SelectListItem>
+                                    {
+                                    new SelectListItem{ Text="Red", Value = "Red" },
+                                    new SelectListItem{ Text="Green", Value = "Green" },
+                                    new SelectListItem{ Text="Amber", Value = "Amber" },
+                                    }, "--Select--", htmlAttributes: new { @class = "form-control", @title = "Select Rating" })
+
+                                    @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.NoOfBeds, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.NoOfBeds, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NoOfBeds, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.NoOfICUBeds, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.NoOfICUBeds, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NoOfICUBeds, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.LandlineNumber, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.LandlineNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.LandlineNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        @if (method == "Edit")
+                        {
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Sequence, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Sequence, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Sequence, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                            <div class="col-md-8">
+                                @Html.CheckBoxFor(model => model.Active, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="form-group col-md-12">
+                    <center>
+                        @if (method == "Edit")
+                        {
+                        @Html.HiddenFor(m=>m.CreatedByID)
+                        @Html.HiddenFor(m => m.CreatedOn)
+                        <input type="submit" class="btn btn-success" value="Update" title="Update" />
+                        <input type="reset" class="btn btn-warning" value="Revert" title="Revert" />
+                        }
+                        else
+                        {
+                        <input type="submit" class="btn btn-success" value="Save" title="Save" />
+                        <input type="reset" class="btn btn-warning" value="Cancel" title="Cancel" />
+                        }
+
+                        <a class="btn btn-info" title="Back To List" href="@Url.Action("Index","Hospital" ,new { id=Model.StateID} )"> Back To List</a>
+                    </center>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    }
+</section>
+<script>
+    $(function () {
+
+        $('#tblHospital').dataTable({
+            order: [],
+            stateSave: true,
+            columnDefs: [{ orderable: false, targets: [2] }]
+        });
+    });
+</script>

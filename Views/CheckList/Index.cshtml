@@ -1,0 +1,250 @@
+﻿@model AyushmanBharat.Models.ViewModels.CheckListVM
+
+@{
+    ViewBag.Title = "CheckList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="content-header">
+    <h1>
+        CheckList
+        <small class="text-muted">           
+            <b class="headerTitle">Protocol -</b> @Model.ProtocolName
+            <br /><b class="headerTitle">Package -</b> @Model.ProcedureName
+        </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="@Url.Action("Index","Protocol")">Protocol</a></li>
+        <li><a href="@Url.Action("Index","Package",new { id = Model.ProtocolID})">Package</a></li>
+        <li class="active">CheckList</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body pad">
+
+                    <div id="dvCheckListCreate">
+                        @using (Html.BeginForm("Create", "CheckList", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(m => m.PackageID)                                
+                                @Html.HiddenFor(m => m.ChecklistCount)
+
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(m => m.StartDate, new { @class = "col-md-3 required" })
+                                    <div class="col-md-9">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(model => model.StartDateString, new { @class = "form-control", @placeHolder = "Enter Start Date", @id = "txtStartDate", @type = "text", @autocomplete = "off" })
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                        @Html.ValidationMessageFor(m => m.StartDateString, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(m => m.Remarks, new { @class = "col-md-3 required" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control", @placeholder = "Remarks", @title = "Enter Remarks." } })
+                                        @Html.ValidationMessageFor(m => m.Remarks, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <div class="form-group col-md-12">
+                                    <center>
+                                        <input type="submit" class="btn btn-success" value="Save" title="Save" id="btnAdd" />
+                                        <input type="reset" class="btn btn-warning" value="Cancel" title="Cancel" />
+                                    </center>
+                                </div>
+
+                                @*<div class="form-group col-md-6">
+                                        @Html.LabelFor(m => m.EndDate, new { @class = "col-md-3 required" })
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "End Date", @title = "Enter End Date." } })
+                                            @Html.ValidationMessageFor(m => m.EndDate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
+                            </div>
+                        }
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="form-group table-responsive">
+                        <div class="col-md-2 col-md-offset-4 tblBack">
+                            <a class="btn btn-info" title="Back to Package" href="@Url.Action("Index","Package",new {id = Model.ProtocolID })"><span> <i class="fa fa-arrow-left" aria-hidden="true"></i></span> Back To Package</a>
+                        </div>
+
+                        <table id="tblCheckList" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(function () {
+
+        $('#txtStartDate').datepicker({
+            format: 'dd-M-yyyy',
+            autoclose: true,
+            orientation: "bottom",
+        });
+
+        var packageID = $("#PackageID").val();
+        $('#tblCheckList').DataTable({
+            "lengthMenu": [[10, 25, 50, 100, 1000], [10, 25, 50, 100, 1000]],
+            "processing": true, // for show progress bar
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            "pageLength": 10,
+            "stateSave": true,
+            "ajax": {
+                "url": "/CheckList/LoadCheckList",
+                "type": "POST",
+                "datatype": "json",
+                "data": { id: packageID }
+            },
+            "columnDefs":
+                [{
+                    "targets": [0, 1, 2, 3, 7],
+                    "visible": false,
+                    "searchable": false,
+                    "orderable": false
+                }],
+            aaSorting: [[7, 'desc']],
+            "columns": [
+                         { data: "CheckListID" },
+                         { data: "PackageID", "autoWidth": true },
+                         { title: "Procedure Name", data: "ProcedureName", "autoWidth": true },
+                         { data: "StartDate" },
+                         { title: "Start Date", data: "StartDateString", "autoWidth": true },
+                         { title: "End Date", data: "EndDateString" },
+                         { title: "Remarks", data: "Remarks", "autoWidth": true },
+                         { data: "CreatedOn" },
+                         //{ data: "PreviousChecklistID" },
+                         {
+                             title: "Actions",
+                             "searchable": false,
+                             "sortable": false,
+                             "render": function (data, type, row, meta) {
+
+                                 if (row.ChecklistCount > 0) {
+                                     $("#dvCheckListCreate").addClass("hidden");
+                                 }
+                                 else {
+                                     $("#dvCheckListCreate").removeClass("hidden");
+                                 }
+
+                                 var strURL = "";
+                                 if (row.EndDateString == "") {
+                                     strURL = strURL + '<a href="#" class ="btn btn-datatable btn-success btnRevise" onclick=ReviseCheckList("' + row.ProtocolID + '","' + row.StartDate + '"); title="Revise Checklist"><span class="glyphicon glyphicon-repeat"></span> Revise</a> | ';
+                                     strURL = strURL + '<a href="@Url.Action("Index", "CheckListQuestion")?packageID=' + row.PackageID + '&&id=' + row.CheckListID + '&&isModifyAllowed=true" class ="btn btn-datatable btn-primary" title="Add New Question"><span class="glyphicon glyphicon-plus"></span> Question <span title="" class="badge bg-yellow">' + row.CheckListQuestionCount + '</span></a>  ';
+                                 }
+                                 else {
+                                     strURL = strURL + '<a href="@Url.Action("Index", "CheckListQuestion")?packageID=' + row.PackageID + '&&id=' + row.CheckListID + '" class ="btn btn-datatable btn-danger" title="View Checklist Question"><span class="glyphicon glyphicon-eye-open"></span> Question <span title="" class="badge bg-yellow">' + row.CheckListQuestionCount + '</span></a>  ';
+                                 }
+                                 return strURL;
+                             }
+                         }
+            ],
+            dom: 'lBfrtip',
+            buttons: [
+          {
+              extend: 'excelHtml5',
+              text: ' <i class="fa fa-download"></i> Export To Excel',
+              className: 'btn btn-success',
+              titleAttr: 'Export to Excel',
+              title: 'CheckLists List',
+              messageTop: 'Excel.',
+              exportOptions: {
+                  modifier: {
+
+                      page: 'all',
+                      //search: 'none'
+                  },
+                  columns: [2, 4, 5, 6]
+              },
+              init: function (api, node, config) {
+                  $(node).removeClass('dt-button buttons-excel buttons-html5');
+              },
+              footer: true
+          }],
+        });
+
+    }); ///////////////////End of Document Ready////////////////////////////////
+
+    ///////////////////////////Check List Revise //////////////////////////////
+
+    function ReviseCheckList(packageId, jsonDate) {
+
+        var startDate = new Date(parseInt(jsonDate.substr(6)));
+        startDate.setDate(startDate.getDate() + 1);
+        var nexDayOfStartDate = startDate;
+        var strStartDate = moment(nexDayOfStartDate).format('DD-MMM-YYYY');
+
+        if (strStartDate != '') {
+            $('#txtStartDate').datepicker('setDate', strStartDate);
+            $('#txtStartDate').datepicker('setStartDate', strStartDate);
+        }
+        $("#dvCheckListCreate").removeClass("hidden");
+    }
+    ///////////////////Ends Check list Revise /////////////////////////////////
+
+    function DeleteCheckList(id) {
+        BootstrapDialog.show({
+            title: "Confirm Box",
+            message: "Are you sure to delete record?",
+            buttons: [{
+                label: 'OK',
+                cssClass: 'btn-primary',
+                icon: "glyphicon glyphicon-check",
+                action: function (dialogItself) {
+                    $.ajax({
+                        url: "@Html.Raw(Url.Action("Delete", "CheckList"))",
+                        type: "GET",
+                        data: { CheckListID: id },
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response == "OK") {
+                                //Refresh Ur Table Here
+                                $('#tblCheckList').DataTable().ajax.reload();
+                                dialogItself.close();
+                                displaySuccessNotification("Deleted Successfully.");
+                            }
+                            else if (response == "Conflict") {
+                                dialogItself.close();
+                                displayErrorNotification("Cannot delete record. Its been used in another masters.");
+                            }
+                            else {
+                                dialogItself.close();
+                                displayErrorNotification("Something Went Wrong.");
+                            }
+                        },
+                        error: function (request, status, error) {
+                            dialogItself.close();
+                            displayErrorNotification("Sorry, An error occured while processing your request.");
+                        }
+                    });
+                }
+            },
+    {
+        label: 'No',
+        cssClass: 'btn-warning',
+        icon: 'fa fa-times',
+        action: function (dialogItself) {
+            dialogItself.close();
+        }
+    }]
+        });
+    }
+</script>

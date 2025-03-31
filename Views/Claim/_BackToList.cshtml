@@ -1,0 +1,81 @@
+﻿@model AyushmanBharat.Models.ViewModels.ClaimVM
+@using AyushmanBharat.Common
+
+
+@if (Model.PageType == PageTypeEnum.ClaimAllocate.ToString())
+{
+    if (Model.ButtonType == "BreadCrumb")
+    {
+        <a href="@Url.Action("Index", "Claim", new { batchID = Model.BatchID })">Claim</a>
+    }
+    else
+    {
+        <a class="btn btn-info" href="@Url.Action("Index", "Claim", new { batchID = Model.BatchID })"> Back To List</a>
+    }
+}
+else if (Model.PageType == PageTypeEnum.ClaimAudit.ToString())
+{
+    if (Model.ButtonType == "BreadCrumb")
+    {
+        <a href="@Url.Action("Audit", "Claim", new { batchID = Model.BatchID, UserAs= Model.UserAs })">Claim</a>
+    }
+    else
+    {
+        <a class="btn btn-info" href="@Url.Action("Audit", "Claim", new { batchID = Model.BatchID, UserAs= Model.UserAs })"> Back To List</a>
+    }
+}
+else if (Model.PageType == PageTypeEnum.Rejected.ToString())
+{
+    if (Model.ButtonType == "BreadCrumb")
+    {
+        <a href="@Url.Action("Rejected", "Claim", new { batchID = Model.BatchID })">Claim</a>
+    }
+    else
+    {
+        <a class="btn btn-info" href="@Url.Action("Rejected", "Claim", new { batchID = Model.BatchID })"> Back To List</a>
+    }
+}
+else if (Model.PageType == PageTypeEnum.ReAllocateAuditor.ToString())
+{
+    if (Model.ButtonType == "BreadCrumb")
+    {
+        <a href="@Url.Action("ReAllocateAuditor", "Claim", new { batchID = Model.BatchID })">Claim</a>
+    }
+    else
+    {
+        <a class="btn btn-info" href="@Url.Action("ReAllocateAuditor", "Claim", new { batchID = Model.BatchID })"> Back To List</a>
+    }
+}
+else if (Model.PageType == PageTypeEnum.ReAllocateQC.ToString())
+{
+    if (Model.ButtonType == "BreadCrumb")
+    {
+        <a href="@Url.Action("ReAllocateQC", "Claim", new { batchID = Model.BatchID })">Claim</a>
+    }
+    else
+    {
+        <a class="btn btn-info" href="@Url.Action("ReAllocateQC", "Claim", new { batchID = Model.BatchID })"> Back To List</a>
+    }
+}
+else if (Model.PageType == PageTypeEnum.Report.ToString())
+{
+    if (Model.ButtonType == "BreadCrumb")
+    {
+        <a href="@Url.Action("ClosedReport", "Claim", new { batchID = Model.BatchID })">Claim</a>
+    }
+    else
+    {
+        <a class="btn btn-info" href="@Url.Action("ClosedReport", "Claim", new { batchID = Model.BatchID })"> Back To List</a>
+    }
+}
+else if (Model.PageType == PageTypeEnum.AuditorwiseReport.ToString())
+{
+    if (Model.ButtonType == "BreadCrumb")
+    {
+        <a href="@Url.Action("AuditorwiseClosedReport", "Claim", new {auditorID = Model.AuditorUserID})">Claim</a>
+    }
+    else
+    {
+        <a class="btn btn-info" href="@Url.Action("AuditorwiseClosedReport", "Claim", new {auditorID = Model.AuditorUserID})"> Back To List</a>
+    }
+}

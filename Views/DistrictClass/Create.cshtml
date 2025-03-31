@@ -1,0 +1,66 @@
+﻿@model AyushmanBharat.Models.ViewModels.DistrictClassVM
+
+@{
+    ViewBag.Title = "Location Class";   
+    var method = "Create";
+    if (ViewBag.IsEditPage != null)
+    {
+        method = "Edit";
+    }
+}
+<section class="content-header">
+    <h1>
+        @method  Location Class
+    </h1>
+</section>
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body pad">
+                    @using (Html.BeginForm(method, "DistrictClass", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.DistrictClassID)
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.DistrictClassName, new { @class = "col-md-3 required" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.DistrictClassName, new { htmlAttributes = new { @class = "form-control", @placeholder = "District Class Name", @title = "Enter District Class Name." } })
+                                @Html.ValidationMessageFor(m => m.DistrictClassName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-12">
+                            <center>
+
+                                @if (method == "Edit")
+                                {
+                                    <input type="submit" class="btn btn-success" value="Update" title="Update" />
+                                    <input type="reset" class="btn btn-warning" value="Revert" title="Revert" />
+                                }
+                                else
+                                {
+                                    <input type="submit" class="btn btn-success" value="Save" title="Save" />
+                                    <input type="reset" class="btn btn-warning" value="Cancel" title="Cancel" />
+                                }
+                                
+                                <a class="btn btn-info" title="Click to back" href="@Url.Action("Index","DistrictClass" )"> Back To List</a>
+                            </center>
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

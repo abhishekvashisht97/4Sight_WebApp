@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0d4e342538214484a9a3d268fb980855" Name="Diagram1" ZoomLevel="27">
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.C__MigrationHistory" Width="1.5" PointX="9" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.AspNetRoles" Width="1.5" PointX="7" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.AspNetUserClaims" Width="1.5" PointX="3.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.AspNetUserLogins" Width="1.5" PointX="5.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.AspNetUsers" Width="1.5" PointX="1" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.Audit_DDL_Changes" Width="1.5" PointX="10.875" PointY="0.625" IsExpanded="true" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="AyushmanBharatDbModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.DistrictClass" Width="1.5" PointX="6.75" PointY="6.125" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.DistrictTrait" Width="1.5" PointX="6.75" PointY="17.125" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.FacilityType" Width="1.5" PointX="9" PointY="6.5" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.InsuranceCompany" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.State" Width="1.5" PointX="3.75" PointY="11.125" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_CommonalityOfOccurence" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.ErrorLog" Width="1.5" PointX="11.375" PointY="4.75" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.ClaimActivityLog" Width="1.5" PointX="23.75" PointY="6" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.Client" Width="1.5" PointX="9" PointY="17.5" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.BatchFlaggingRuleMapping" Width="1.5" PointX="16.875" PointY="20.875" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.ClaimFlaggingScore" Width="1.5" PointX="24.125" PointY="12.75" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.Batch" Width="1.5" PointX="19.25" PointY="2.75" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_Batch_Client" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_BatchFlaggingRuleMapping_Batch" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.Beneficiary" Width="1.5" PointX="16.25" PointY="10.5" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_Beneficiary_InsuranceCompany" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_Beneficiary_State" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.Document" Width="1.5" PointX="16.5" PointY="2.25" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.Protocol" Width="1.5" PointX="12" PointY="26.25" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.CheckList" Width="1.5" PointX="16.5" PointY="6.125" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.Package" Width="1.5" PointX="14.25" PointY="18.625" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_CheckList_Package" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_Document_Package" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_Package_FacilityType" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_Package_Protocol" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_Package_State" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.CheckListQuestion" Width="1.5" PointX="18.75" PointY="6.875" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_CheckListQuestion_CheckList" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.ClaimCheckListQuestion" Width="1.5" PointX="26.75" PointY="8.375" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_ClaimCheckListQuestion_CheckListQuestion" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.Claim" Width="1.5" PointX="21.5" PointY="2.625" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_Claim_Batch" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_Claim_Beneficiary" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_Claim_Package" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_ClaimActivityLog_Claim" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_ClaimCheckListQuestion_Claim" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_ClaimFlaggingScore_Claim" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.CommonalityOfOccurence" Width="1.5" PointX="0.75" PointY="11" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_Package_CommonalityOfOccurence" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.FlaggingRule" Width="1.5" PointX="13.625" PointY="14" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.Hospital" Width="1.5" PointX="11.25" PointY="8.75" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_BatchFlaggingRuleMapping_FlaggingRule" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_Claim_Hospital" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_ClaimFlaggingScore_FlaggingRule" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_Hospital_FacilityType" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_Hospital_State" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.District" Width="1.5" PointX="9" PointY="10.625" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_Beneficiary_District" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_District_District" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_District_DistrictClass" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_District_State" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_Hospital_District" />
+        <EntityTypeShape EntityType="AyushmanBharatDbModel.ClaimTemp" Width="1.5" PointX="21.5" PointY="19.25" />
+        <AssociationConnector Association="AyushmanBharatDbModel.FK_ClaimTemp_Batch" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

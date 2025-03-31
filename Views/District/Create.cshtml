@@ -1,0 +1,127 @@
+﻿@model AyushmanBharat.Models.ViewModels.DistrictVM
+
+@{
+    ViewBag.Title = "Location";
+    var method = "Create";
+    if (ViewBag.IsEditPage != null)
+    {
+        method = "Edit";
+    }
+}
+<section class="content-header">
+    <h1>
+        @method  Location<small class="text-muted"><b class="headerTitle">State - </b> @Model.StateName</small>
+    </h1>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body pad">
+                    @using (Html.BeginForm(method, "District", FormMethod.Post, new { id = "frmDistrict" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @Html.HiddenFor(model => model.DistrictID)
+                            @Html.HiddenFor(model => model.StateID)
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.DistrictName, htmlAttributes: new { @class = "control-label col-md-3 required" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.DistrictName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DistrictName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Population, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.Population, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Population, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.PopulationDensity, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.PopulationDensity, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PopulationDensity, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.DistrictTraitID, htmlAttributes: new { @class = "control-label col-md-3 required" })
+                                <div class="col-md-9">
+                                    @Html.DropDownListFor(model => model.DistrictTraitID, Model.DistrictTraitList, "--Select Location Trait--", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.DistrictTraitID, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.DistrictClassID, htmlAttributes: new { @class = "control-label col-md-3 required" })
+                                <div class="col-md-9">
+                                    @Html.DropDownListFor(model => model.DistrictClassID, Model.DistrictClassList, "--Select Location Class--", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.DistrictClassID, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            @if (method == "Edit")
+                            {
+                              
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(model => model.RedCount, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.RedCount, new { htmlAttributes = new { @class = "form-control", @readonly=true } })
+                                        @Html.ValidationMessageFor(model => model.RedCount, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(model => model.AmberCount, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.AmberCount, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                        @Html.ValidationMessageFor(model => model.AmberCount, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            }
+
+                            @*<div class="form-group col-md-6">
+                                    @Html.LabelFor(model => model.StateID, htmlAttributes: new { @class = "control-label col-md-3 required" })
+                                    <div class="col-md-9">
+                                        @Html.DropDownListFor(model => model.StateID, Model.StateList, "--Select State--", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>*@
+
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-12">
+                                <center>
+                                    @if (method == "Edit")
+                                    {
+                                        <input type="submit" class="btn btn-success" value="Update" title="Update" />
+                                        <input type="reset" class="btn btn-warning" value="Revert" title="Revert" />
+                                    }
+                                    else
+                                    {
+                                        <input type="submit" class="btn btn-success" value="Save" title="Save" />
+                                        <input type="reset" class="btn btn-warning" value="Cancel" title="Cancel" />
+                                    }
+
+                                    <a class="btn btn-info" title="Back To List" href="@Url.Action("Index","District",new { id=Model.StateID} )"> Back To List</a>
+                                </center>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

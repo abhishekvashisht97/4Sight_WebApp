@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Error ";
+}
+
+<section class="content-header">
+    <h1>
+        Error
+    </h1>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body pad">
+
+                    <div class="error-page">
+                        <center>
+                            <h3><i class="fa fa-warning text-red"></i> Oops! Something went wrong.</h3>
+
+                            <p style="font-size: 13pt;">
+                                We will work on fixing that right away.
+                                <br />
+                                Meanwhile, you may <a href="@Url.Action("Index","Home")">return to dashboard</a>
+                                <br />
+                                <br />
+                                Thank you for your patience.
+                            </p>
+                        </center>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

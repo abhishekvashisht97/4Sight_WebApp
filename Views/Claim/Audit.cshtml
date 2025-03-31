@@ -1,0 +1,165 @@
+﻿
+@model AyushmanBharat.Models.ViewModels.ClaimVM
+@using AyushmanBharat.Common
+@{
+    ViewBag.Title = "Claim";
+}
+
+<section class="content-header">
+    <h1>
+        Claim
+    </h1>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body pad">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.HiddenFor(model => model.UserAs)
+                            @Html.LabelFor(model => model.BatchID, htmlAttributes: new { @class = "control-label" })<br />
+                            @Html.DropDownListFor(model => model.BatchID, Model.BatchList, "--Select Batch--", new { @id = "ddlBatch", @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr />
+                    <div class="form-group table-responsive">
+                        <table id="tblClaim" class="table table-striped  table-responsive table-bordered dt-responsive nowrap" cellspacing="0"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(function () {
+
+        GetClaimByBatchId($("#ddlBatch").val());
+
+        $("#ddlBatch").change(function () {
+            $('#tblClaim').dataTable().fnDestroy();
+            GetClaimByBatchId($('#ddlBatch :selected').val());
+        });
+    });
+
+    function BatchReload() {
+
+        $.ajax({
+            type: "POST",
+            url: "/Claim/GetUploadedBatch",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (res) {
+
+                $("#ddlBatch").empty().append('<option value="">--Select Batch--</option>'); //remove all child nodes
+                $.each(res, function (data, value) {
+
+                    $("#ddlBatch").append($("<option></option>").val(value.Value).html(value.Text));
+                })
+            }
+        });
+    }
+
+    function GetClaimByBatchId(batchId) {
+        var UserAs = $("#UserAs").val();
+        var table = $('#tblClaim').DataTable({
+            "lengthMenu": [[10, 25, 50, 100, 1000], [10, 25, 50, 100, 1000]],
+            "processing": true, // for show progress bar
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            "pageLength": 10,
+            "stateSave": true,
+            "ajax": {
+                "url": "/Claim/LoadClaims",
+                "type": "POST",
+                "datatype": "json",
+                "data": { 'batchID': batchId, 'UserAs': UserAs },
+            },
+            "columns": [
+            { "title": "ClaimID", "data": "ClaimID", "visible": false, "searchable": false },
+            { "title": "BatchID", "data": "BatchID", "visible": false, "searchable": false },
+            { "title": "Flagging Score", "data": "FlaggingScore", "autoWidth": true },
+            { "title": "Case Number", "data": "CaseNumber", "autoWidth": true },
+            { "title": "Patient", "data": "PatientName", "autoWidth": true },
+            { "title": "Speciality", "data": "Speciality", "autoWidth": true },
+            { "title": "Hospital", "data": "HospitalName", "autoWidth": true },
+            { "title": "Protocol Code", "data": "ProtocolCode", "autoWidth": true , "visible": false},
+            { "title": "Procedure Code", "data": "ProcedureCode", "autoWidth": true },
+            { "title": "Procedure", "data": "ProcedureName", "autoWidth": true },
+            {
+                "title": "Admission Date", "data": "AdmissionDate", "autoWidth": true, "visible": false,
+                "render": function (data, type, row, meta) {
+                    return (moment(data).isValid()) ? moment(data).format('DD-MMM-YYYY hh:mm A') : "";
+                }
+            },
+            {
+                "title": "Surgery Date", "data": "SurgeryDate", "autoWidth": true, "visible": false, "searchable": false,
+                "render": function (data, type, row, meta) {
+                    return (moment(data).isValid()) ? moment(data).format('DD-MMM-YYYY hh:mm A') : "";
+                }
+            },
+            {
+                "title": "Discharge Date", "data": "DischargeDate", "autoWidth": true, "visible": false, "searchable": false,
+                "render": function (data, type, row, meta) {
+                    return (moment(data).isValid()) ? moment(data).format('DD-MMM-YYYY hh:mm A') : "";
+                }
+            },
+            {
+                "title": "Claim Raised Date", "data": "ClaimRaisedDate", "autoWidth": true, "visible": false, "searchable": false,
+                "render": function (data, type, row, meta) {
+                    return (moment(data).isValid()) ? moment(data).format('DD-MMM-YYYY hh:mm A') : "";
+                }
+            },
+              //{
+              //    "title": "Audited",
+              //    "data": "IsAudited",
+              //    "autoWidth": true,
+              //    "searchable": false,
+              //    "sortable": false,
+              //    "render": function (data, type, row, meta) {
+              //        if (type === "exportxls") {
+              //            return row.IsAudited;
+              //        }
+              //        else {
+              //            if (row.IsAudited == true) {
+              //                return '<span class="glyphicon glyphicon-ok text-success"></span>';
+              //            }
+              //            else {
+              //                return '<span class="glyphicon glyphicon-remove text-danger"></span>';
+              //            }
+              //        }
+              //    }
+              //},
+            {
+                "title": "Action",
+                "searchable": false,
+                "sortable": false,
+                "render": function (data, type, row, meta) {
+
+                    var strURL = '';
+                    strURL = strURL + '<a href="@Url.Action("Detail", "Claim")?id=' + row.ClaimID + '&&UserAs=' + UserAs + '&&pageType=@PageTypeEnum.ClaimAudit.ToString()" class ="btn btn-datatable btn-danger" title="Details"><span class="glyphicon glyphicon-eye-open"></span> Detail</a>';
+
+                    if ($("#UserAs").val() == 'Auditor') {
+                        if (row.AuditStatus == '@AuditStatusEnum.Allocated.ToString()') {
+                            strURL = strURL + ' | <a href="@Url.Action("Index", "ClaimCheckListQuestion")?id=' + row.ClaimID + '&&packageID=' + row.PackageID + '&&pageType=@PageTypeEnum.ClaimAudit.ToString()&&UserAs=' + UserAs + '" class ="btn btn-datatable btn-primary" title="Modify Question"><span class="glyphicon glyphicon-list-alt"></span> CheckList</a>  ';
+                        }
+                    }
+                    if ($("#UserAs").val() == 'QC') {
+                        if (row.AuditStatus == '@AuditStatusEnum.QCPending.ToString()') {
+                            strURL = strURL + ' | <a href="@Url.Action("Index", "ClaimCheckListQuestion")?id=' + row.ClaimID + '&&packageID=' + row.PackageID + '&&pageType=@PageTypeEnum.ClaimAudit.ToString()&&UserAs='+UserAs+'" class ="btn btn-datatable btn-warning" title="View Question"><span class="glyphicon glyphicon-list-alt"></span> CheckList</a>  ';
+                        }
+                    }
+                    return strURL;
+                }
+            }
+            ],
+            dom: '<lf<t>ip>',
+            aaSorting: [[2, 'desc']],
+        });
+        /////////////////////Ends Table///////////////////////////
+    }
+    ////////////ENDS GetClaimByBatchId()  /////////////////////////////////////
+</script>

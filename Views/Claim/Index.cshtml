@@ -1,0 +1,699 @@
+﻿@model AyushmanBharat.Models.ViewModels.ClaimVM
+@using AyushmanBharat.Common
+@{
+    ViewBag.Title = "Claim";
+}
+
+<section class="content-header">
+    <h1>
+        Claim
+    </h1>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            @if (User.IsInRole(UserRoleEnum.FunctionalAdmin.ToString()))
+            {
+                <div class="box box-primary">
+
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Import Claim</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+
+                    <div class="box-body pad">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="form-horizontal">
+                                    <div class="row">
+                                        <div class="form-group col-md-8 no-padding">
+                                            <div class="col-md-2 margin-r-m15">
+                                                <a title="Download Template" href="@Url.Action("Download","Document",new { FilePath = "~/Uploads/Template/ClaimTemplate.xlsx" })" class="btn btn-warning" download>
+                                                    <i class="fa fa-download"></i>
+                                                    Template
+                                                </a>
+                                            </div>
+
+                                            @Html.LabelFor(model => model.ClientID, htmlAttributes: new { @class = "control-label col-md-3 required" })
+                                            <div class="col-md-7">
+                                                @Html.DropDownListFor(model => model.ClientID, Model.ClientList, "---Select Client---", new { @id = "ddlClient", @class = "form-control" })
+                                                <span id="spnClient" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            @Html.Label("Upload Claims", htmlAttributes: new { @class = "control-label col-md-4 required" })
+                                            <div class="col-md-8">
+                                                <input id="fileImport" type="file" class="filestyle" data-input="false">
+                                                <br /><span id="spnFile" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-8 no-padding">
+                                            <div class="col-md-2 margin-r-m15"></div>
+
+                                            @Html.Label("Flagging Parameter", htmlAttributes: new { @class = "control-label col-md-3 required" })
+                                            <div class="col-md-7">
+                                                @Html.DropDownListFor(model => model.FlaggingRuleVM.FlaggingRuleID, Model.FlaggingRuleVM.FlaggingRuleParameterList, new { @id = "ddlFlag", @multiple = "multiple", @class = "form-control", @title = "Select Flagging Rule Parameter" })
+                                                <span id="spnFlag" class="text-danger"></span>
+                                                @Html.HiddenFor(m => m.FlaggingRuleVM.SelectedParameters, new { @id = "hdnSelectedParameters" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            @Html.Label("Upload Documents", htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                <input id="BatchZipFile" type="file" accept=".zip" class="filestyle" data-input="false">
+                                                <br />
+                                                <span class="text-danger">(Only zip file)</span>
+                                                @*<br /><span id="spnBatchZipFile" class="text-danger"></span>*@
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-1">
+                                            <button type="button" class="btn btn-info" title="Import selected file" id="btnImport" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Processing Import">
+                                                <i class="fa fa-upload"></i>
+                                                Import
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group hidden" id="dvError">
+                            <p class="d-inline bg-danger">
+                                <b>Following rows are not imported.</b>
+                            </p>
+                            <div id="dvTableError"></div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Filter</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <div class="box-body pad">
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(model => model.BatchID, htmlAttributes: new { @class = "control-label required" })<br />
+                        @Html.DropDownListFor(model => model.BatchID, Model.BatchList, "--Select Batch--", new { @id = "ddlBatch", @class = "form-control" })
+                        <span id="spnBatch" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(model => model.FromScore, htmlAttributes: new { @class = "control-label" })<br />
+                        @Html.TextBoxFor(model => model.FromScore, new { @id = "txtFromScore", @class = "form-control", @type = "number" })
+                    </div>
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(model => model.ToScore, htmlAttributes: new { @class = "control-label" })<br />
+                        @Html.TextBoxFor(model => model.ToScore, new { @id = "txtToScore", @class = "form-control", @type = "number" })
+                    </div>
+                    <div class="form-group col-md-3">
+                        <br />
+                        <button type="button" id="btnSearch" class="btn btn-success" style="margin-top: 7px;"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                    </div>
+                    <div class="clearfix"></div>
+
+                </div>
+            </div>
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Allocate Claim</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <div class="box-body pad">
+                    <div class="clearfix"></div>
+                    <div class="form-group table-responsive">
+
+                        @if (User.IsInRole(UserRoleEnum.FunctionalAdmin.ToString()))
+                        {
+                            <input id="hdnRole" type="hidden" value="@UserRoleEnum.FunctionalAdmin.ToString()" />
+                        }
+                        else
+                        {
+                            <input id="hdnRole" type="hidden" value="" />
+                        }
+
+                        <table id="tblClaim" class="table table-striped  table-responsive table-bordered dt-responsive nowrap" cellspacing="0"></table>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    @if (User.IsInRole(UserRoleEnum.FunctionalAdmin.ToString()))
+                    {
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.AuditorUserID, htmlAttributes: new { @class = "control-label" })<br />
+                                @Html.DropDownListFor(model => model.AuditorUserID, Model.AuditorList, "--Select Auditor--", new { @id = "ddlAuditor", @class = "form-control" })
+                                <span id="spnAuditor" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-3">
+                                @Html.Label("QC", htmlAttributes: new { @class = "control-label" })<br />
+                                @Html.DropDownListFor(model => model.QCUserID, Model.QCList, "--Select QC--", new { @id = "ddlQC", @class = "form-control" })
+                                <span id="spnQC" class="text-danger"></span>
+                            </div>
+
+                            @*<div class="col-md-3">
+                                @Html.Label("Upload Documents", htmlAttributes: new { @class = "control-label" }) <br />
+                                <input id="claimFiles" type="file" class="filestyle" data-input="false" multiple>
+                                </div>*@
+                        </div>
+
+                        <div class="pull-right dvFunctionalAdmin hidden">
+                            <button type="button" class="btn btn-success" title="Submit Selected" id="btnSubmit" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Processing Selected Claim">Submit</button>
+                            <button type="button" class="btn btn-warning" title="Batch Complete" id="btnComplete" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Processing Batch Claim">Batch Complete</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(function () {
+
+        //Set Flag
+        $("#ddlFlag").multiselect({
+            includeSelectAllOption: true,
+            enableCaseInsensitiveFiltering: true,
+            enableFiltering: true,
+            maxHeight: 200,
+            buttonWidth: '100%',
+            onSelectAll: function (checked) {
+                var selectedFlag = ($("#ddlFlag").val() != null ? $("#ddlFlag").val().join(',') : "");
+                $("#hdnSelectedParameters").val(selectedFlag);
+            },
+            onChange: function (element, checked) {
+                var selectedFlag = ($("#ddlFlag").val() != null ? $("#ddlFlag").val().join(',') : "");
+                $("#hdnSelectedParameters").val(selectedFlag);
+            }
+        });
+
+        var selectedFlagName = $("#hdnSelectedParameters").val();
+        if (selectedFlagName != "" && selectedFlagName !== null && typeof (selectedFlagName) !== 'undefined') {
+            var roleArray = selectedFlagName.split(",");
+            // Set the value
+            $("#ddlFlag").val(roleArray);
+            // Then refresh
+            $("#ddlFlag").multiselect("refresh");
+        }
+        ////////////////////////////////////Ends Flag//////////////////////////
+
+        GetClaims($("#ddlBatch").val(), $("#txtFromScore").val(), $("#txtToScore").val());
+
+        $("#btnSearch").click(function () {
+            $('#tblClaim').dataTable().fnDestroy();
+            var batchID = $('#ddlBatch :selected').val();
+            var fromScore = $("#txtFromScore").val();
+            var toScore = $("#txtToScore").val();
+            debugger;
+            if (batchID != null && batchID != '' && typeof (batchID) != 'undefined') {
+                $("#spnBatch").text("");
+                $("#ddlBatch").css('border-color', '#d2d6de');               
+                GetClaims(batchID, fromScore, toScore);
+            }
+            else {
+                $("#spnBatch").text("Please select batch.");
+                $("#ddlBatch").css('border-color', 'red');
+            }
+
+        });
+
+        //$("#ddlBatch").change(function () {
+        //    $('#tblClaim').dataTable().fnDestroy();
+        //    GetClaims($("#ddlBatch").val(), $("#txtFromScore").val(), $("#txtToScore").val());
+        //});
+
+        $("#ddlClient").change(function () {
+            var client = $("#ddlClient").val();
+            if (client == "") {
+                $("#spnClient").text("Please select client.");
+            } else {
+                $("#spnClient").text("");
+            }
+        });
+
+        $("#ddlAuditor").change(function () {
+            var auditorID = $("#ddlAuditor").val();
+            if (auditorID == "") {
+                $("#ddlAuditor").css('border-color', 'red');
+                $("#spnAuditor").text("Select auditor.");
+            }
+            else {
+                $("#ddlAuditor").css('border-color', '#d2d6de');
+                $("#spnAuditor").text("");
+            }
+            LoadQC(auditorID);
+        });
+
+        $("#ddlQC").change(function () {
+            var QCID = $("#ddlQC").val();
+            if (QCID == "") {
+                $("#ddlQC").css('border-color', 'red');
+                $("#spnQC").text("Select QC.");
+            }
+            else {
+                $("#ddlQC").css('border-color', '#d2d6de');
+                $("#spnQC").text("");
+            }
+        });
+        ///////////////////Import Excel//////////////////////////
+
+        $("#fileImport").change(function () {
+            validateExcelFile('fileImport');
+        });
+
+        $("#BatchZipFile").change(function () {
+            validateZIPFile('BatchZipFile');
+        });
+
+        $("#btnImport").click(function () {
+            var clientID = $("#ddlClient").val();
+            var file = $("#fileImport").val();
+            //var BatchZipFile = $("#BatchZipFile").val();
+            var flaggingRules = $("#hdnSelectedParameters").val();
+            var isValid = true;
+
+            if (clientID == "") {
+                $("#spnClient").text("Please select client.");
+                isValid = false;
+            } else {
+                $("#spnClient").text("");
+            }
+
+            if (file == "") {
+                $("#spnFile").text("Please select file.");
+                isValid = false;
+            } else {
+                $("#spnFile").text("");
+            }
+
+            //if (BatchZipFile == "") {
+            //    $("#spnBatchZipFile").text("Please select file.");
+            //    isValid = false;
+            //} else {
+            //    $("#spnBatchZipFile").text("");
+            //}
+
+            if (flaggingRules == "") {
+                $("#spnFlag").text("Please select flagging parameters.");
+                isValid = false;
+            }
+            else {
+                $("#spnFlag").text("");
+            }
+
+            if (isValid) {
+                //if (file != "" && BatchZipFile != "") {
+                if (file != "") {
+                    var excelFile = document.getElementById("fileImport").files[0];
+                    var _BatchzipFile = document.getElementById("BatchZipFile").files[0];
+                    var formData = new FormData();
+                    formData.append("file", excelFile);
+                    formData.append("zipfile", _BatchzipFile);
+                    formData.append("clientID", clientID);
+                    formData.append("flaggingRules", flaggingRules);
+                    var url = '@Url.Action("ImportFromExcel", "Claim")';
+
+                    ImportExcelFile(url, formData, "tblClaim");
+                }
+                else {
+                    displayErrorNotification("Please choose file to upload.");
+                }
+            }
+        });
+        ////////////////////////////////////////////////////////////
+    });
+
+
+    function BatchReload() {
+
+        $.ajax({
+            type: "POST",
+            url: "/Claim/GetUploadedBatch",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (res) {
+
+                $("#ddlBatch").empty().append('<option value="">--Select Batch--</option>'); //remove all child nodes
+                $.each(res, function (data, value) {
+
+                    $("#ddlBatch").append($("<option></option>").val(value.Value).html(value.Text));
+                })
+            }
+        });
+    }
+
+    var rows_selected = [];
+    function selectOrDeselectRow(claimID, isChecked) {
+        // Determine whether claimID ID is in the list of selected claim IDs
+        var index = $.inArray(claimID, rows_selected);
+        // If checkbox is checked and claim ID is not in list of selected claim IDs
+        if (isChecked && index === -1) {
+            rows_selected.push(claimID);
+            // Otherwise, if checkbox is not checked and claim ID is in list of selected claim IDs
+        } else if (!isChecked && index !== -1) {
+            rows_selected.splice(index, 1);
+        }
+    }
+
+    function GetClaims(batchId, fromScore, toScore) {
+
+        var table = $('#tblClaim').DataTable({
+            "lengthMenu": [[10, 25, 50, 100, 1000], [10, 25, 50, 100, 1000]],
+            "processing": true, // for show progress bar
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            "pageLength": 10,
+            "serverSide": true,
+            //"stateSave": true,
+            "ajax": {
+                "url": "/Claim/LoadPagedClaims",
+                "type": "POST",
+                "datatype": "json",
+                "data": { 'batchID': batchId, 'fromScore': fromScore, 'toScore': toScore },
+            },
+            "language": {
+                "infoFiltered": ""
+            },
+            "columnDefs":
+                [{
+                    'targets': 0,
+                    'visible': $("#hdnRole").val() == 'FunctionalAdmin',
+                    'searchable': false,
+                    'orderable': false,
+                    'width': "2%",
+                    'className': 'dt-body-center',
+                    'render': function (data, type, row, meta) {
+                        //return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
+                        return '<input type="checkbox" name="id[]" class="chkClaim" id="' + row.ClaimID + '">';
+                    },
+                },
+                {
+                    'targets': 1,
+                    'className': "tdClaimID hidden",
+                    'width': "2%",
+                }
+                ],
+            'select': 'multi',
+            aaSorting: [[3, 'desc']],
+            "columns": [
+            {},
+            { "title": "ClaimID", "data": "ClaimID", "searchable": false },
+            { "title": "BatchID", "data": "BatchID", "visible": false, "searchable": false },
+            { "title": "Flagging <br/> Score", "data": "FlaggingScore", "autoWidth": true },
+            { "title": "Case Number", "data": "CaseNumber", "autoWidth": true },
+            { "title": "Patient", "data": "PatientName", "autoWidth": true },
+            { "title": "Speciality", "data": "Speciality", "autoWidth": true },
+            { "title": "Hospital", "data": "HospitalName", "autoWidth": true },
+            //{ "title": "Protocol Code", "data": "ProtocolCode", "autoWidth": true },
+            { "title": "Procedure Code", "data": "ProcedureCode", "autoWidth": true },
+            { "title": "Procedure", "data": "ProcedureName", "autoWidth": true },
+            //{
+            //    "title": "Claim Raised Date", "data": "ClaimRaisedDate", "autoWidth": true, "visible": false, "searchable": false,
+            //    "render": function (data, type, row, meta) {
+            //        return (moment(data).isValid()) ? moment(data).format('DD-MMM-YYYY hh:mm A') : "";
+            //    }
+            //},
+            {
+                "title": "Action",
+                "searchable": false,
+                "sortable": false,
+                "render": function (data, type, row, meta) {
+
+                    var strURL = '';
+                    strURL = strURL + '<a href="@Url.Action("Detail", "Claim")?id=' + row.ClaimID + '&&pageType=@PageTypeEnum.ClaimAllocate.ToString()" class ="btn btn-datatable btn-danger" title="Details"><span class="glyphicon glyphicon-eye-open"></span> Detail</a>';
+
+                    return strURL;
+                }
+            }
+            ],
+            'rowCallback': function (row, data, dataIndex) {
+                debugger;
+                // Determine whether claimID ID is in the list of selected claim IDs
+                var rowFound = $.inArray(data.ClaimID, rows_selected);
+                if (rowFound !== -1) {
+                    $(row).find('.chkClaim').prop('checked', true);
+                    $(row).find('.chkClaim').attr('checked', 'checked')
+                    $(row).addClass("selected");
+                }
+            },
+            //dom: '<lf<t>ip>',
+            dom: 'Blfrtip',
+            buttons: [
+            {
+                text: ' <i class="fa fa-check-square-o"></i> Select Page',
+                className: 'btn btn-primary btn-selectPage',
+                init: function (api, node, config) {
+                    $(node).removeClass('dt-button buttons-excel buttons-html5');
+                    if ($("#hdnRole").val() != 'FunctionalAdmin') {
+                        $(node).addClass('hidden');
+                    }
+                },
+                action: function () {
+                    //table.rows().select();
+                    var currentPage = table.rows({ page: 'current' }).nodes();
+                    currentPage.each(function (index) {
+                        $(this).find('.chkClaim').prop('checked', true);
+                        $(this).find('.chkClaim').attr('checked', 'checked')
+                        $(this).addClass("selected");
+                    });
+                    var pgSelectedData = table.rows({ page: 'current' }).data();
+                    pgSelectedData.each(function (data, index) {
+                        selectOrDeselectRow(data.ClaimID, true);
+                    });
+                }
+            },//--------------------Ends Select Page Button------------------------------------
+            {
+                text: '<i class="fa fa-times"></i> DeSelect Page',
+                className: 'btn btn-warning  btn-deSelectPage',
+                init: function (api, node, config) {
+                    $(node).removeClass('dt-button buttons-excel buttons-html5');
+                    if ($("#hdnRole").val() != 'FunctionalAdmin') {
+                        $(node).addClass('hidden');
+                    }
+                },
+                action: function () {
+                    var currentPage = table.rows({ page: 'current' }).nodes();
+                    currentPage.each(function (index) {
+                        var currentRow = $(this).closest("tr")[0];
+                        var claimID = currentRow.cells[1].innerHTML;
+                        selectOrDeselectRow(claimID, false);
+                        $(this).find('.chkClaim').prop('checked', false);
+                        $(this).find('.chkClaim').removeAttr('checked');
+                        $(this).removeClass("selected");
+                    });
+                    var pgDeSelectData = table.rows({ page: 'current' }).data();
+                    pgDeSelectData.each(function (data, index) {
+                        selectOrDeselectRow(data.ClaimID, false);
+                    });
+                }
+            } //--------------------Ends DeSelect Page Button-----------------------------------
+            ],
+            "initComplete": function (settings, json) {
+                if (table.data().length > 0) {
+                    $(".dvFunctionalAdmin").removeClass("hidden");
+                    $(".dvAuditor").removeClass("hidden");
+                }
+                else {
+                    $(".dvFunctionalAdmin").addClass("hidden");
+                    $(".dvAuditor").addClass("hidden");
+                }
+                EnableDisableButton();
+            }
+        });
+        /////////////////////Ends Table///////////////////////////
+
+        /////////////////Datatable Events/////////////////////////////
+        // Handle click on checkbox to set state of "Select all" control
+        $('#tblClaim tbody').on('change', 'input[type="checkbox"]', function (e) {
+            //var checkedItems = new Array();
+            /////////////////////
+            debugger;
+            var $row = $(this).closest('tr');
+            if (this.checked) {
+                $row.addClass('selected');
+            } else {
+                $row.removeClass('selected');
+            }
+
+            var currentRow = $(this).closest("tr");
+            var claimID = currentRow.find(".tdClaimID").text(); // get current row 3rd TD
+            selectOrDeselectRow(claimID, this.checked);
+
+            // If checkbox is not checked
+            if (!this.checked) {
+                var el = $('#chkSelectAll').get(0);
+                // If "Select all" control is checked and has 'indeterminate' property
+                if (el && el.checked && ('indeterminate' in el)) {
+                    // Set visual state of "Select all" control
+                    // as 'indeterminate'
+                    el.indeterminate = true;
+                }
+            }
+            EnableDisableButton();
+        });
+
+        //Submit Table data
+        $('#btnSubmit').click(function (e) {
+            var $this = $(this);
+            $this.button('loading');
+
+            e.preventDefault();
+            var auditorID = $("#ddlAuditor").val();
+            var isValid = true;
+            if (auditorID == "") {
+                $('#ddlAuditor').focus();
+                $("#ddlAuditor").css('border-color', 'red');
+                $("#spnAuditor").text("Select auditor.");
+                isValid = false;
+            }
+
+            var QCUserID = $("#ddlQC").val();
+            var isValid = true;
+            if (QCUserID == "") {
+                $('#ddlQC').focus();
+                $("#ddlQC").css('border-color', 'red');
+                $("#spnQC").text("Select QC.");
+                isValid = false;
+            }
+
+            var formData = new FormData();
+
+            if (isValid) {
+                var ClaimAudit = [];
+
+                //$("#tblClaim tr.selected").each(function (index, row) {
+                // Iterate over all selected checkboxes
+                $.each(rows_selected, function (index, ClaimID) {
+
+                    var claim = {};
+                    //var ClaimID = $(row).find(".tdClaimID").html();
+                    //var item = $("#tblClaim").dataTable().fnGetData()[index];
+                    if (auditorID !== "0") {
+                        claim = { "ClaimID": ClaimID, "AuditorUserID": auditorID, "AuditStatus": '@AuditStatusEnum.Allocated.ToString()', "QCUserID": QCUserID };
+                    }
+                    ClaimAudit.push(claim);
+                });
+                formData.append('claimAuditList', JSON.stringify(ClaimAudit));
+
+                if (ClaimAudit.length > 0) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "/Claim/Submit",
+                        cache: false,
+                        data: formData,
+                        dataType: 'json',
+                        contentType: false, // Not to set any content header
+                        //contentType: 'application/json; charset=utf-8',
+                        processData: false, // Not to process data
+                        success: function (data) {
+                            if (data == "Success") {
+                                displaySuccessNotification("Claim Submitted Successfully.");
+                                rows_selected = [];
+                            } else if (data == "NoRow") {
+                                displaySuccessNotification("No rows selected.");
+                            }
+                            //$('#btnSubmit').one('click', clickSubmitHandler);
+                        },
+                        error: function (ex) {
+                            displayErrorNotification("Sorry an internal error occured," + ex);
+                            $this.button('reset');
+                        },
+                        complete: function () {
+                            $('#tblClaim').DataTable().ajax.reload();
+                            //reset state
+                            $this.button('reset');
+                        }
+                    });
+                }
+                else {
+                    //reset state
+                    $this.button('reset');
+                }
+                e.stopImmediatePropagation();
+                return false;
+            }
+            else {
+                $this.button('reset');
+            }
+        });
+
+        //To prevent from posting multiple times in a controller
+        //$('#btnSubmit').one('click', clickSubmitHandler);
+
+        $('#btnComplete').click(function (e) {
+
+
+            var $this = $(this);
+            $this.button('loading');
+            var batchID = $("#ddlBatch").val();
+
+            $.ajax({
+                url: "/Claim/BatchComplete",
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                data: JSON.stringify({ batchID: batchID }),
+                type: 'POST',
+                success: function (data) {
+                    if (data == "Success") {
+                        displaySuccessNotification("Batch Completed Successfully.");
+                        BatchReload();
+                        $('#tblClaim').DataTable().ajax.reload();
+                    }
+                },
+                error: function (ex) {
+                    displayErrorNotification("Sorry an internal error occured," + ex);
+                    $this.button('reset');
+                },
+                complete: function () {
+                    $('#tblClaim').DataTable().ajax.reload();
+                    //reset state
+                    $this.button('reset');
+                }
+            });
+
+            e.stopImmediatePropagation();
+            return false;
+        });
+
+        // $('#btnComplete').one('click', clickCompleteHandler);
+
+        function EnableDisableButton() {
+            var selectedRowLength = $("#tblClaim tr.selected").length;
+            if (selectedRowLength > 0) {
+                $("#btnSelected").attr("disabled", false);
+            }
+            else {
+                $("#btnSelected").attr("disabled", true);
+            }
+        }
+        ///////////////////////////////////////////////////////////
+    }
+    ////////////ENDS GetClaims()  /////////////////////////////////////
+</script>

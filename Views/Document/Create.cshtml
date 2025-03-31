@@ -1,0 +1,146 @@
+﻿@model AyushmanBharat.Models.ViewModels.DocumentVM
+
+@{
+    ViewBag.Title = "Protocol Document";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var method = "Create";
+    if (ViewBag.IsEditPage != null)
+    {
+        method = "Edit";
+
+    }
+}
+
+<section class="content-header">
+    <h1>
+        Document
+        <small class="text-muted">
+            <b class="headerTitle">Protocol -</b> @Model.ProtocolName
+            <br /><b class="headerTitle">Package -</b> @Model.ProcedureName
+        </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="@Url.Action("Index","Protocol")">Protocol</a></li>
+        <li><a href="@Url.Action("Index","Package",new { id = Model.ProtocolID})">Package</a></li>
+        <li class="active">Document</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body pad">
+                    @using (Html.BeginForm(method, "Document", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", role = "form" }))
+            {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.PackageID)
+                        @Html.HiddenFor(model => model.DocumentID)
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @*<div class="form-group col-md-6">
+                                    @Html.LabelFor(m => m.ProtocolID, "Protocol", new { @class = "col-md-3 required" })
+                                    <div class="col-md-9">
+                                        @if (ViewBag.ProtocolID != null)
+                                        {
+                                            @Html.DropDownListFor(t => t.ProtocolID, null, "--Select Procedure Name--", htmlAttributes: new { @class = "form-control", @title = "Select Protocol" })
+                                            @Html.ValidationMessageFor(model => model.ProtocolID, "", new { @class = "text-danger" })
+                                        }
+                                    </div>
+                                </div>*@
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.DocumentType, new { @class = "col-md-3 required" })
+                                <div class="col-md-9">
+                                    @Html.DropDownListFor(model => model.DocumentType, Model.DocumentTypeList, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.DocumentType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.NameOfDocument, new { @class = "col-md-3 required" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.NameOfDocument, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name Of Document", @title = "Enter Name Of Document." } })
+                                    @Html.ValidationMessageFor(m => m.NameOfDocument, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.file, "File Attachment", new { @class = "col-md-3 required" })
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(t => t.file, new { @class = "form-control", @type = "file" })
+                                    @Html.HiddenFor(model => model.FileName)
+                                    <br />
+                                    <span>image Or .pdf file</span>
+                                    <br />
+                                    @Html.ValidationMessageFor(m => m.FileName, "", new { @class = "text-danger" })                                                                       
+                                </div>
+                            </div>
+
+                            @if (method == "Edit")
+                            {
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(m => m.file, "Uploaded File", new { @class = "col-md-3" })
+                                    <div class="col-md-9">
+                                        @if (!string.IsNullOrEmpty(Model.FilePath))
+                                        {
+                                            <a href="@Url.Action("Download", "Document", new { FilePath = Model.FilePath }) " class="btn btn-success" download><i class="fa fa-download"></i> Download</a>
+                                            <p>@Model.FileName</p>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" class="btn btn-danger" disabled><i class="fa fa-ban"></i> File Not Found</a>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-12">
+                                <center>
+                                    @if (method == "Edit")
+                                    {
+                                        <input type="submit" class="btn btn-success" value="Update" title="Update" />
+                                        <input type="reset" class="btn btn-warning" value="Revert" title="Revert" />
+                                    }
+                                    else
+                                    {
+                                        <input type="submit" class="btn btn-success" value="Save" title="Save" />
+                                        <input type="reset" class="btn btn-warning" value="Cancel" title="Cancel" />
+                                    }
+
+                                    <a class="btn btn-info" title="Back To List" href="@Url.Action("Index", "Document", new { id = Model.PackageID })"> Back To List</a>
+                                </center>
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(function () {
+        $('#tblGeneric').dataTable({
+            order: [],
+            stateSave: true,
+            columnDefs: [{ orderable: false, targets: [2] }]
+        });
+
+        $("#file").change(function () {            
+            $("#FileName").val($('#file').val());
+            var isValid = validateDocumentPdfAndImage('file');
+            if(!isValid)
+            {
+                $("#FileName").val("");
+            }
+        });
+    });
+</script>
+
+

@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "Triggers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="content-header">
+    <h1>Triggers</h1>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body pad">
+                    <div class="clearfix"></div>
+                    <div class="form-group table-responsive">
+                        <table id="tblTriggers" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0">
+                            <thead>
+                                <tr>
+                                   <th>Parameters</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Accident Case?</td>
+                                </tr>
+                                <tr>
+                                    <td>All Documents Present As Defined By AB?</td>
+                                </tr>
+                                <tr>
+                                    <td>All Documents Present As Defined By INCHES?</td>
+                                </tr>
+                                <tr>
+                                    <td>All Documents Present As Defined By Insurer?</td>
+                                </tr>
+                                <tr>
+                                    <td>Beneficiary Or Beneficiary ID Part Of Multiple Family?</td>
+                                </tr>
+                                <tr>
+                                    <td>Beneficiary Part Of The Beneficiary List?</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Does Beneficiary Has Any Known Medical History?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Existing Hospital Rating?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Hospital Within 50 kms Of Beneficiary Address?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Is the Hospital De-Empanelled?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Mortality?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Multiple Members Of Same Family Unit Admitted Together
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Pincode Of Beneficiary Address & Hospital Same?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Portability?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Ratio Of District To State Population V/S The Ratio Of # Claims In A District To State
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Early Claim?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Pre Exsiting Disease ?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Life Insurance In multiple Companies ?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Cause Of Death ?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Death Certificate  Signed By Athorised Doctor ?
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(function () {
+
+        $('#tblTriggers').DataTable({
+            "lengthMenu": [[10, 25, 50, 100, 1000], [10, 25, 50, 100, 1000]],
+            "processing": true, // for show progress bar
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            "pageLength": 10,
+            "stateSave": true,
+        });
+    });
+</script>
+

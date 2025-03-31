@@ -1,0 +1,55 @@
+﻿@using AyushmanBharat.Common
+@{
+    //success messages
+    var successMessages = new List<string>();
+    if (TempData[string.Format("PS.notifications.{0}", NotifyType.Success)] != null)
+    {
+        successMessages.AddRange(TempData[string.Format("PS.notifications.{0}", NotifyType.Success)] as IList<string>);
+    }
+    if (ViewData[string.Format("PS.notifications.{0}", NotifyType.Success)] != null)
+    {
+        successMessages.AddRange(ViewData[string.Format("nop.notifications.{0}", NotifyType.Success)] as IList<string>);
+    }
+
+    //error messages
+    var errorMessages = new List<string>();
+    if (TempData[string.Format("PS.notifications.{0}", NotifyType.Error)] != null)
+    {
+        errorMessages.AddRange(TempData[string.Format("PS.notifications.{0}", NotifyType.Error)] as IList<string>);
+    }
+    if (ViewData[string.Format("PS.notifications.{0}", NotifyType.Error)] != null)
+    {
+        errorMessages.AddRange(ViewData[string.Format("PS.notifications.{0}", NotifyType.Error)] as IList<string>);
+    }
+}
+
+@*This is used for displaying Success messages from jquery*@
+<div id="dvSuccessMsg" class="messageBox alert alert-success fade in hidden">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+    <div id="successNotification"></div>
+</div>
+
+@*This is used for displaying Error mesages from jquery*@
+<div id="dvErrorMsg" class="messageBox alert alert-danger fade in hidden">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+    <div id="errorNotification"></div>
+</div>
+
+@*This is used for displaying Success messages from controller actions*@
+@foreach (var message in successMessages)
+{
+    <div class="messageBox alert alert-success fade in alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+        <strong> @message </strong>
+    </div>
+}
+
+@*This is used for displaying Success messages from controller actions*@
+@foreach (var message in errorMessages)
+{
+    <div class="messageBox alert alert-danger fade in alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+        <strong> @message</strong>
+    </div>
+}
+

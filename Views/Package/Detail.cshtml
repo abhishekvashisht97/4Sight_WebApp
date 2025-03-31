@@ -1,0 +1,332 @@
+﻿@model AyushmanBharat.Models.ViewModels.PackageVM
+
+@{
+    ViewBag.Title = "Package";
+}
+
+<section class="content-header">
+    <h1>
+        Package Detail <small class="text-muted"><b class="headerTitle">Protocol - </b>@Model.ProtocolName</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="@Url.Action("Index","Protocol")">Protocol</a></li>
+        <li><a href="@Url.Action("Index","Package",new { id = Model.ProtocolID})">Package</a></li>
+        <li class="active">Detail</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="form-horizontal">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Package<small class="text-muted">(Created On:@Model.CreatedOn.Date.ToString("dd-MM-yyyy"))</small></h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+
+                    <div class="box-body pad">
+                        @Html.HiddenFor(model => model.ProtocolID)
+                        @Html.HiddenFor(model => model.PackageID)
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.ProcedureCode)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.ProcedureCode, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.ProcedureName)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.ProcedureName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.Rate)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                 @Html.DisplayFor(model => model.Rate, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.ICDCode)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.ICDCode, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.StateID)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.StateName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        @*<div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.InsuranceCompanyID)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.InsuranceCompanyName, new { @class = "form-control" })
+                            </div>
+                        </div>*@
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.ABLOS)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.ABLOS, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.InsurerLOS)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.InsurerLOS, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.InchesLOS)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.InchesLOS, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.ClassificationOfPackage)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.ClassificationOfPackage, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        @*<div class="form-group col-md-6">
+                                <div class="col-md-4">
+                                    <strong>@Html.DisplayNameFor(model => model.InsurerAge)</strong>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.DisplayFor(model => model.InsurerAge, new { @class = "form-control" })
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+                @*End OF Ayushman Package*@
+
+                <div class="clearfix"></div>
+
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Insurer</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+                    <div class="box-body pad">
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.GovtReservedProcedure)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @if (Model.GovtReservedProcedure == true)
+                                {
+                                    <span class="glyphicon glyphicon-ok text-success"></span>
+                                }
+                                else
+                                {
+                                    <span class="glyphicon glyphicon-remove text-danger"></span>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.MedicalorSurgical)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.MedicalorSurgical, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">INCHES</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+                    <div class="box-body pad">
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.CommonalityOfOccurenceID)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.CommonalityOfOccurenceName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.FraudPotential)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.FraudPotential, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.MinimumNumberofDaysAdmission)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.MinimumNumberofDaysAdmission, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.FacilityTypeID)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.FacilityTypeName, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.GenderSpecific)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.GenderSpecific, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.Gender)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.Gender, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.AgeSpecific)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.AgeSpecific, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        @if (Model.AgeSpecific == "Yes")
+                        {
+                            <div class="form-group col-md-6">
+                                <div class="form-group col-md-6">
+                                    <div class="col-md-8">
+                                        <strong>@Html.DisplayNameFor(model => model.FromAge)</strong>
+                                    </div>
+                                    <div class="col-md-4">
+                                        @Html.DisplayFor(model => model.FromAge, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="col-md-8">
+                                        <strong>@Html.DisplayNameFor(model => model.ToAge)</strong>
+                                    </div>
+                                    <div class="col-md-4">
+                                        @Html.DisplayFor(model => model.ToAge, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.LOSRemarks)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.LOSRemarks, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.AuditorCommentAboutPreAuth)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.AuditorCommentAboutPreAuth, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="form-group col-md-6">
+                            <div class="col-md-4">
+                                <strong>@Html.DisplayNameFor(model => model.AuditorCommentAboutSettlement)</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.AuditorCommentAboutSettlement)
+                            </div>
+                        </div>
+                        @*<div class="form-group col-md-6">
+                                <div class="col-md-4">
+                                    <strong>@Html.DisplayNameFor(model => model.CreatedOn)</strong>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.DisplayFor(model => model.CreatedOn)
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+                @*End OF Inchecs*@
+
+                <div class="clearfix"></div>
+                <div class="form-group col-md-12">
+                    <center>
+                        <a href="@Url.Action("Edit", "Package", new { id = Model.PackageID})" title="Edit" class="btn btn-success">Edit</a>
+                        <a class="btn btn-info" href="@Url.Action("Index","Package", new { id = Model.ProtocolID } )"> Back To List</a>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

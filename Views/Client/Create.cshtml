@@ -1,0 +1,88 @@
+﻿@model AyushmanBharat.Models.ViewModels.ClientVM
+
+@{    
+    ViewBag.Title = "Client";
+    var method = "Create";
+    if (ViewBag.IsEditPage != null)
+    {
+        method = "Edit";
+    }
+}
+<section class="content-header">
+    <h1>
+        @method  Client
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="@Url.Action("Index","Client")">Client</a></li>
+        <li class="active">@method</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body pad">
+                    @using (Html.BeginForm(method, "Client", FormMethod.Post, new { id = "frmClient" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @Html.HiddenFor(model => model.ClientID)
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.ClientCode, htmlAttributes: new { @class = "control-label col-md-3 required" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.ClientCode, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ClientCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.ClientName, htmlAttributes: new { @class = "control-label col-md-3 required" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ClientName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            @if (method == "Edit")
+                            {
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.CheckBoxFor(model => model.Active, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            }
+
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-12">
+                                <center>
+                                    @if (method == "Edit")
+                                    {
+                                        @Html.HiddenFor(model => model.CreatedByID)
+                                        @Html.HiddenFor(model => model.CreatedOn)
+                                        <input type="submit" class="btn btn-success" value="Update" title="Update" />
+                                        <input type="reset" class="btn btn-warning" value="Revert" title="Revert" />
+                                    }
+                                    else
+                                    {
+                                        <input type="submit" class="btn btn-success" value="Save" title="Save" />
+                                        <input type="reset" class="btn btn-warning" value="Cancel" title="Cancel" />
+                                    }
+
+                                    <a class="btn btn-info" title="Back To List" href="@Url.Action("Index","Client" )"> Back To List</a>
+                                </center>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

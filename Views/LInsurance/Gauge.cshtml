@@ -1,0 +1,487 @@
+﻿
+@{
+    ViewBag.Title = "Anthropometric";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="content-header">
+    <h1>Gauge</h1>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body pad">
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <div class="table-responsive">
+                            <table id="tblGauge" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Age
+                                        </th>
+                                        <th>
+                                            Gender
+                                        </th>
+                                        <th>Adhar Number</th>
+                                        <th>Pan Card Number</th>
+                                        <th>Contact Details</th>
+                                        <th>Hobbies</th>
+                                        <th>Email ID</th>
+                                        <th>
+                                            Industry
+                                        </th>
+                                        <th>Designation</th>
+                                        <th> Annual Income (&#x20b9;)</th>
+                                        <th>Insurance Amount (&#x20b9;)</th>
+                                        <th>Premium Amount (&#x20b9;)</th>
+                                        <th>
+                                            Habits ( Alcohol, Smoking , Narcotics, Gutka /Tobbaco )
+                                        </th>
+                                        <th>
+                                            Quantity Of Alcohol , Cigarette ,Gutka /Tobacco
+                                        </th>
+                                        <th>
+                                            Frequency
+                                        </th>
+                                        @*
+                                            <th>
+                                                Height(cms)
+                                            </th>
+                                            <th>
+                                                Weight(kg)
+                                            </th>*@
+                                        <th>
+                                            BMI
+                                        </th>
+                                        <th>Previous Disease History</th>
+                                        <th colspan="4">
+                                            Family history
+                                        </th>
+                                    </tr>
+                                   
+                                     <tr>
+                                        <th colspan="18">
+                                        </th>
+                                        <th>
+                                            Mother
+                                        </th>
+                                        <th>
+                                            Father
+                                        </th>
+                                        <th>
+                                            Brother
+                                        </th>
+                                        <th>
+                                            Sister
+                                        </th>
+                                    </tr>
+                                </thead>
+                               
+                                 <tr>
+                                    <td>
+                                        Rakesh Sharma
+                                    </td>
+                                    <td class="text-right">
+                                        28
+                                    </td>
+                                    <td>
+                                        Male
+                                    </td>
+
+                                    <td>428Z7920W50028QP</td>
+                                    <td>8AAPFU0939F2ZV</td>
+                                    <td class="text-right">7845130698</td>
+                                    <td>Trekking</td>
+                                    <td>asas@gmail.com</td>
+
+                                    <td>
+                                        Advertising
+                                    </td>
+                                     <td>Chief Editor</td>
+                                    <td class="text-right">300000</td>
+                                    <td class="text-right">30000000</td>
+                                    <td class="text-right">270000</td>
+                                    @*
+                                        <td class="text-right">30270000</td>*@
+                                    <td>
+                                        Cigarette Smoking
+                                    </td>
+                                    <td>
+                                        10
+                                    </td>
+                                    <td>
+                                        Everyday
+                                    </td>
+                                  
+                                    @*
+                                        <td class="text-right">
+                                            175
+                                        </td>
+                                        <td class="text-right">
+                                            94
+                                        </td>*@
+                                    <td class="text-right">
+                                        30.69
+                                    </td>
+                                     <td></td>
+                                    <td>
+                                        Diabetis
+                                    </td>
+                                    <td>
+                                        Hypertension
+                                    </td>
+                                    <td>
+                                        NA
+                                    </td>
+                                    <td>
+                                        Thyroid
+                                    </td>
+                                </tr>
+                              
+                                  <tr>
+                                    <td>
+                                        Grishma Raj
+                                    </td>
+                                    <td class="text-right">
+                                        32
+                                    </td>
+                                    <td>
+                                        Female
+                                    </td>
+                                    <td>841A8324C36068FN</td>
+                                    <td>7AAPFU0939F1ZV</td>
+                                    <td class="text-right">4578963210</td>
+                                    <td>Water Sports	</td>
+                                    <td>Grishma@gmail.com</td>
+
+                                    <td>
+                                        BPO
+                                    </td>
+                                      <td>Outsourcing</td>
+                                    <td class="text-right">400000</td>
+                                    <td class="text-right">50000000</td>
+                                    <td class="text-right"></td>
+                                    @*
+                                        <td class="text-right">50000000</td>*@
+
+                                    <td>
+                                        Alcohol
+                                    </td>
+                                    <td>
+                                        1/2 Pint
+                                    </td>
+                                    <td>
+                                        Everyday
+                                    </td>
+                                    @*
+                                        <td class="text-right">
+                                            165
+                                        </td>
+                                        <td class="text-right">
+                                            85
+                                        </td>*@
+                                    <td class="text-right">
+                                        31.22
+                                    </td>
+                                      <td></td>
+                                    <td>
+                                        Diabetis
+                                    </td>
+                                    <td>
+                                        NA
+                                    </td>
+                                    <td>
+                                        NA
+                                    </td>
+                                    <td>
+                                        NA
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Pritiesh Pillai</td>
+                                    <td class="text-right">35</td>
+                                    <td>Male</td>
+                                    <td>676K4853B47826MG</td>
+                                    <td>9AAPFU0939F3ZV</td>
+                                    <td class="text-right">9874563210</td>
+                                    <td>Paragliding</td>
+                                    <td>DSAs@gmail.com</td>
+                                    <td>Advertising</td>
+                                    <td>Creative Director</td>
+                                    <td class="text-right">3000000</td>
+                                    <td class="text-right">
+                                        30000000
+                                    </td>
+                                    <td class="text-right">270000</td>
+                                    @*
+                                        <td class="text-right">30270000</td>*@
+                                    <td>Cigarette Smoking</td>
+                                    <td>3</td>
+                                    <td>Everyday</td>
+                                   
+                                    @*
+                                        <td class="text-right">175</td>
+                                        <td class="text-right">88</td>*@
+                                    <td class="text-right">28.73</td>
+                                    <td>Cataract Surgery</td>
+                                    <td>Diabetis</td>
+                                    <td>Hypertension</td>
+                                    <td>NA</td>
+                                    <td>Thyroid</td>
+                                </tr>
+                                <tr>
+                                    <td>Aishwarya Nair</td>
+                                    <td class="text-right">33</td>
+                                    <td>Female</td>
+                                    <td>174Q2934S71346XX</td>
+                                    <td>6AAPFU0939F4ZV</td>
+                                    <td class="text-right">5879945120</td>
+                                    <td>Bike Riding</td>
+                                    <td>POQas@gmail.com</td>
+                                    <td>Banking</td>
+                                    <td>CFA</td>
+                                    <td class="text-right">4000000</td>
+                                    <td class="text-right">50000000</td>
+                                    <td class="text-right">270000</td>
+                                    @*
+                                        <td class="text-right">50270000</td>*@
+                                    <td>Alcohol</td>
+                                    <td>1/2 Pint</td>
+                                    <td>Everyday</td>
+                                    @*
+                                        <td class="text-right">140</td>
+                                        <td class="text-right">85</td>*@
+                                   
+                                    <td class="text-right">43.36</td>
+                                    <td>Bypass Surgery</td>
+                                    <td>Diabetis</td>
+                                    <td>NA</td>
+                                    <td>NA</td>
+                                    <td>NA</td>
+                                </tr>
+                                <tr>
+                                    <td>Mayur Shah</td>
+                                    <td class="text-right">22</td>
+                                    <td>Male</td>
+                                    <td>214O2395N21746ZK</td>
+                                    <td>6BAPFU0939F5ZV</td>
+                                    <td class="text-right">5879945121</td>
+                                    <td>Horse Riding</td>
+                                    <td>Lop@gmail.com</td>
+                                    <td>Railway</td>
+                                    <td>Chief Train Clerk</td>
+                                    <td class="text-right">300000</td>
+                                    <td class="text-right">300000</td>
+                                    <td class="text-right">300000</td>
+                                    @*
+                                        <td class="text-right">30300000</td>*@
+                                    <td>Cigarette Smoking</td>
+                                    <td>1/2 Pint</td>
+                                    <td>Weekly</td>
+                                    @*
+                                        <td class="text-right">165</td>
+                                        <td class="text-right">94</td>*@
+                                    <td class="text-right">34.52</td>
+                                    <td>Kidney Failure</td>
+                                    <td>Diabetis</td>
+                                    <td>Hypertension</td>
+                                    <td>NA</td>
+                                    <td>Thyroid</td>
+                                </tr>
+                                <tr>
+                                    <td>Hanshi Naik</td>
+                                    <td class="text-right">32</td>
+                                    <td>Female</td>
+                                    <td>451I6077U26831SD</td>
+                                    <td>5AAPFU0939F6ZV</td>
+                                    <td class="text-right">5879945122</td>
+                                    <td>Trekking</td>
+                                    <td>Jade@gmail.com</td>
+                                    <td>Accounting</td>
+                                    <td>CPA</td>
+                                    <td class="text-right">4005000</td>
+                                    <td class="text-right">50000000</td>
+                                    <td class="text-right">270000</td>
+                                    @*
+                                        <td class="text-right">50270000</td>*@
+                                    <td>Narcotic</td>
+                                    <td>1/2 Pint</td>
+                                    <td>Weekly</td>
+                                    @*
+                                        <td class="text-right">158</td>
+                                        <td class="text-right">58</td>*@
+                                    <td class="text-right">23.23</td>
+                                    <td></td>
+                                    <td>Diabetis</td>
+                                    <td>NA</td>
+                                    <td>NA</td>
+                                    <td>NA</td>
+                                </tr>
+                                <tr>
+                                    <td>Shreyansh Shetty</td>
+                                    <td class="text-right">46</td>
+                                    <td>Male</td>
+                                    <td>604Z9424L90822QL</td>
+                                    <td>5AAPFU0939F7ZV</td>
+                                    <td class="text-right">5879945123</td>
+                                    <td>Paragliding</td>
+                                    <td>Shetty@gmail.com</td>
+                                    <td>Advertising</td>
+                                    <td>Art Director</td>
+                                    <td class="text-right">300000</td>
+                                    <td class="text-right">30000000</td>
+                                    <td class="text-right">270000</td>
+                                    @*<td class="text-right">30270000</td>*@
+                                    <td>Cigarette Smoking</td>
+                                    <td>1</td>
+                                    <td>Weekly</td>
+                                    @*<td class="text-right">170</td>
+                                      <td class="text-right">94</td>*@
+                                    <td class="text-right">32.52</td>
+                                    <td></td>
+                                    <td>Diabetis</td>
+                                    <td>Hypertension</td>
+                                    <td>NA</td>
+                                    <td>Thyroid</td>
+                                </tr>
+                                <tr>
+                                    <td>Priti Gupta</td>
+                                    <td class="text-right">34</td>
+                                    <td>Female</td>
+                                    <td>468U2115N41827DB</td>
+                                    <td>7AAPFU0939F8ZV</td>
+                                    <td class="text-right">5879945124</td>
+                                    <td>Paragliding</td>
+                                    <td>Gupta@gmail.com</td>
+                                    <td>IT</td>
+                                    <td>Software Developer</td>
+                                    <td class="text-right">500000</td>
+                                    <td class="text-right">50000000</td>
+                                    <td class="text-right"></td>
+                                    @*<td class="text-right">50000000</td>*@
+                                    <td>Smoking</td>
+                                    <td>1/2 Pint</td>
+                                    <td>Weekly</td>
+                                    @*<td class="text-right">150</td>
+                                        <td class="text-right">64</td>*@
+                                    <td class="text-right">28.44</td>
+                                    <td>Cancer Treatment</td>
+                                    <td>Tuberculosis</td>
+                                    <td>NA</td>
+                                    <td>NA</td>
+                                    <td>NA</td>
+                                </tr>
+                                <tr>
+                                    <td>Anand Ahuja</td>
+                                    <td class="text-right">36</td>
+                                    <td>Male</td>
+                                    <td>445I9145U95877ME</td>
+                                    <td>1NAPFU0939F9ZV</td>
+                                    <td class="text-right">5879945125</td>
+                                    <td>Bike Riding</td>
+                                    <td>Ahuja@gmail.com</td>
+                                    <td>IT</td>
+                                    <td>Software Tester</td>
+                                    <td class="text-right">552100</td>
+                                    <td class="text-right">  7845102322</td>
+                                    <td class="text-right"></td>
+                                    @*<td class="text-right">7845102322</td>*@
+                                    <td>Alcohol, Cigarette</td>
+                                    <td>5 Pint</td>
+                                    <td>Weekly</td>
+                                    @*<td class="text-right">185</td>
+                                        <td class="text-right">75</td>*@
+                                    <td class="text-right">21.22</td>
+                                    <td></td>
+                                    <td>NA</td>
+                                    <td>NA</td>
+                                    <td>NA</td>
+                                    <td>NA</td>
+                                </tr>
+                                <tr>
+                                    <td>Arya Pasare</td>
+                                    <td class="text-right">28</td>
+                                    <td>Female</td>
+                                    <td>241S9503P45650EE</td>
+                                    <td>8BCPFU0939F10ZV</td>
+                                    <td class="text-right">5879945126</td>
+                                    <td>Horse Riding</td>
+                                    <td>Pasare@gmail.com</td>
+                                    <td>Graphic Designing</td>
+                                    <td>Visual Image Developer</td>
+                                    <td class="text-right">10000020</td>
+                                    <td class="text-right">35400</td>
+                                    <td class="text-right"></td>
+                                    @*
+                                        <td class="text-right">35400</td>*@
+                                    <td>Alcohol</td>
+                                    <td>2 Pint</td>
+                                    <td>Everyday</td>
+                                    @*
+                                        <td class="text-right">160</td>
+                                        <td class="text-right">45</td>*@
+                                    <td class="text-right">30.89</td>
+                                    <td>Bypass Surgery</td>
+                                    <td>Ulcer</td>
+                                    <td>Dibetic</td>
+                                    <td>NA</td>
+                                    <td>NA</td>
+                                </tr>
+                                <tr>
+                                    <td>Raj Shetti</td>
+                                    <td class="text-right">50</td>
+                                    <td>Male</td>
+                                    <td>209D6845A38916SL</td>
+                                    <td>7PAPFU0939F11ZV</td>
+                                    <td class="text-right">5879945127</td>
+                                    <td>Water Sports</td>
+                                    <td>Shetti@gmail.com</td>
+                                    <td>IT</td>
+                                    <td>Project Manager</td>
+                                    <td class="text-right">10120021</td>
+                                    <td class="text-right">451200</td>
+                                    <td class="text-right"></td>
+                                    @*
+                                        <td class="text-right">451200</td>*@
+                                    <td>Alcohol</td>
+                                    <td>6 Pint</td>
+                                    <td>Everyday</td>
+                                    @*
+                                        <td class="text-right">175</td>
+                                        <td class="text-right">80</td>*@
+                                    <td class="text-right">20.23</td>
+                                    <td></td>
+                                    <td>NA</td>
+                                    <td>NA</td>
+                                    <td>NA</td>
+                                    <td>NA</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(function () {
+        $('#tblGauge').DataTable({
+            "lengthMenu": [[10, 25, 50, 100, 1000], [10, 25, 50, 100, 1000]],
+            "processing": true, // for show progress bar
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            "pageLength": 10,
+            "stateSave": true,
+        });
+    });
+</script>
+

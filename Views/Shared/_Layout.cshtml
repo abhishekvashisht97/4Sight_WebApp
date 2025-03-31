@@ -1,0 +1,269 @@
+﻿@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+@using AyushmanBharat.Common
+@{
+    var currentUserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+    var currentUserName = System.Web.HttpContext.Current.User.Identity.GetUserName();
+    var currentUserRoles = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().GetRoles(currentUserId).ToList();
+    var currentUserRoleName = string.Join(", ", currentUserRoles);
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 4Sight</title>
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/bundles/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryDatatable")
+    @Scripts.Render("~/bundles/additionalJS")
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="se-pre-con"></div>
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="@Url.Action("Index","Home")" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                @*<span class="logo-mini"><b>A</b>B</span> This was not there b4*@
+                @*<span class="logo-mini"><img src="~/Content/images/logo-small.png" class="brand-image img-circle" alt="Brand Logo"></span>*@
+                <span class="logo-mini"><img src="~/Content/images/logo-small.png" class="brand-image img-circle" alt="Brand Logo"></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg">
+                    @*<img src="~/Content/images/logo-small.png" class="brand-lg-image img-circle" alt="Brand Logo">*@
+                    <img src="~/Content/images/4sight-logo.png" class="brand-lg-image" alt="Brand Logo">
+                    @*<b class="logo-header-Text">Ayushman Bharat</b>*@
+                </span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span>@User.Identity.Name</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @*ulLogout*@
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            @currentUserRoleName
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="@Url.Action("ResetPassword", "Account",new {id= currentUserId, name = currentUserName})" class="btn btn-success"><i class="fa fa-lock" aria-hidden="true"></i> Reset Password</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="@Url.Action("LogOff","Account")" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-log-out"> </span> Sign out</a>
+                                    </div>
+                                    @*<div class="pull-right">
+                                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit" class="btn btn-default btn-flat"> <span class="glyphicon glyphicon-log-out"> LogOut </span> &nbsp;</button>
+                                            }
+                                        </div>*@
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+
+        @if (Request.IsAuthenticated)
+        {
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <li>
+                            <a href="@Url.Action("Index", "Home")">
+                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            </a>
+                        </li>
+                        @if (User.IsInRole(UserRoleEnum.Admin.ToString()))
+                        {
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-user"></i>
+                                    <span>Access</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="@Url.Action("Users", "Account")"><i class="fa fa-circle-o"></i> Users</a></li>
+                                </ul>
+                            </li>
+                        }
+                        @if (User.IsInRole(UserRoleEnum.Admin.ToString()) || User.IsInRole(UserRoleEnum.FunctionalAdmin.ToString()))
+                        {
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-hospital-o"></i>
+                                    <span>Masters</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @if (User.IsInRole(UserRoleEnum.Admin.ToString()))
+                                    {
+                                        <li><a href="@Url.Action("Index", "DistrictTrait")"><i class="fa fa-circle-o"></i> Trait</a></li>
+                                        <li><a href="@Url.Action("Index", "DistrictClass")"><i class="fa fa-circle-o"></i> Class</a></li>
+                                        <li><a href="@Url.Action("Index", "FacilityType")"><i class="fa fa-circle-o"></i> Facility Type</a></li>
+                                        <li class="underline">
+                                            <a class="hidden" href="@Url.Action("Index", "CommonalityOfOccurence")"><i class="fa fa-circle-o"></i> Commonality <br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; Of Occurence</a>
+                                        </li>
+                                        <li><a href="@Url.Action("Index", "InsuranceCompany")"><i class="fa fa-circle-o"></i> Insurance Company</a></li>
+                                        <li><a href="@Url.Action("Index", "State")"><i class="fa fa-circle-o"></i> State/Location/Hospital</a></li>
+                                        <li><a href="@Url.Action("Index", "Beneficiary")"><i class="fa fa-circle-o"></i> Policy Holder</a></li>
+                                        <li><a href="@Url.Action("Index", "Client")"><i class="fa fa-circle-o"></i> Client </a></li>
+                                    }
+                                    @if (User.IsInRole(UserRoleEnum.FunctionalAdmin.ToString()))
+                                    {
+                                        <li><a href="@Url.Action("Index", "Protocol")"><i class="fa fa-circle-o"></i> Protocol/Package</a></li>
+                                        <li><a href="@Url.Action("Index", "FlaggingRule")"><i class="fa fa-circle-o"></i> Flagging Rule</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+
+                        @if (User.IsInRole(UserRoleEnum.FunctionalAdmin.ToString()))
+                        {
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-medkit"></i>
+                                    <span>Claim</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="@Url.Action("Index", "Claim")"><i class="fa fa-circle-o"></i>Allocate</a></li>
+                                    <li><a href="@Url.Action("ReAllocateAuditor", "Claim")"><i class="fa fa-circle-o"></i>ReAllocate(Auditor)</a></li>
+                                    <li><a href="@Url.Action("ReAllocateQC", "Claim")"><i class="fa fa-circle-o"></i>ReAllocate(QC)</a></li>
+                                    <li><a href="@Url.Action("Batch", "Claim")"><i class="fa fa-circle-o"></i>Delete Batch</a></li>
+                                </ul>
+                            </li>
+                        }
+
+                        @if (User.IsInRole(UserRoleEnum.Auditor.ToString()))
+                        {
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-gavel"></i>
+                                    <span>Auditor</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="@Url.Action("Audit", "Claim", new { UserAs = "Auditor"})"><i class="fa fa-circle-o"></i>Audit</a></li>
+                                    <li><a href="@Url.Action("Rejected", "Claim")"><i class="fa fa-circle-o"></i> Rejected By QC</a></li>
+                                </ul>
+                            </li>
+                        }
+
+                        @if (User.IsInRole(UserRoleEnum.QC.ToString()))
+                        {                          
+                            <li>
+                                <a href="@Url.Action("Audit", "Claim", new { UserAs = "QC"})">
+                                    <i class="fa fa-balance-scale"></i> <span>QC</span>
+                                </a>
+                            </li>
+                        }
+
+                        @if (User.IsInRole(UserRoleEnum.FunctionalAdmin.ToString()))
+                        {
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-line-chart"></i>
+                                    <span>Claim Reports</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>                         
+                                <ul class="treeview-menu">
+                                    <li><a href="@Url.Action("ClosedReport", "Claim")"><i class="fa fa-circle-o"></i>Report</a></li>
+                                    <li><a href="@Url.Action("AuditorwiseClosedReport", "Claim")"><i class="fa fa-circle-o"></i>Auditorwise Report</a></li>
+                                </ul>
+
+                            </li>
+                        }
+
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-heartbeat"></i>
+                                <span>Life Insurance</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="@Url.Action("Diagnostic", "LInsurance")"><i class="fa fa-circle-o"></i>Diagnostic Center</a></li>
+                                <li><a href="@Url.Action("Fraudulent", "LInsurance")"><i class="fa fa-circle-o"></i>Fraudulent Cases</a></li>
+                                <li><a href="@Url.Action("RiskQuotient", "LInsurance")"><i class="fa fa-circle-o"></i>Risk Quotient</a></li>
+                                <li><a href="@Url.Action("IncomeStrata", "LInsurance")"><i class="fa fa-circle-o"></i>Income Strata</a></li>
+                                <li><a href="@Url.Action("Industry", "LInsurance")"><i class="fa fa-circle-o"></i>Industry</a></li>
+                                <li><a href="@Url.Action("Gauge", "LInsurance")"><i class="fa fa-circle-o"></i>Gauge</a></li>
+                                <li><a href="@Url.Action("SalesChannel", "LInsurance")"><i class="fa fa-circle-o"></i>Sales Channel</a></li>
+                                <li><a href="@Url.Action("PolicyPortability", "LInsurance")"><i class="fa fa-circle-o"></i>Policy Portability</a></li>
+                                <li><a href="@Url.Action("PolicyDuration", "LInsurance")"><i class="fa fa-circle-o"></i>Policy Duration</a></li>
+                                <li><a href="@Url.Action("Index", "LInsurer")"><i class="fa fa-circle-o"></i>Claims Settlement</a></li>
+                                <li><a href="@Url.Action("Triggers", "LInsurance")"><i class="fa fa-circle-o"></i>Trigger Factors</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+        <!-- Content Wrapper. Contains page content -->
+        }
+        <div class="content-wrapper">
+            @*<div id="cover"></div>*@
+            <!-- Main content -->
+            <div class="clearfix"></div>
+            <div id="notifications">
+                @Html.Partial("_Notifications")
+            </div>
+            @RenderBody()
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 1.0
+            </div>
+            <strong>Copyright &copy; 2018-2019 </strong> All rights
+            reserved.
+        </footer>
+        <!-- Add the sidebar's background. This div must be placed
+             immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+    </div>
+    <!-- ./wrapper -->
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

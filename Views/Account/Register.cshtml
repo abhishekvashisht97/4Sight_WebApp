@@ -1,0 +1,153 @@
+﻿@model AyushmanBharat.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Register";
+    var method = "Register";
+    var IsEdit = false;
+    if (ViewBag.IsEditPage != null)
+    {
+        method = "EditUser";
+        IsEdit = true;
+    }
+}
+
+<section class="content-header">
+    <h1>
+        User Info
+    </h1>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body pad">
+                    @using (Html.BeginForm(method, "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        if (!IsEdit)
+                        {
+                            <div class="col-md-12">
+                                <p><b> Note : </b>Password should be combination of 'A-Z , a-z , numbers, special charecters(@@, #, &, etc.)</p>
+                            </div>
+                        }
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.UserName, new { @class = "col-md-3 required" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "User Name", @title = "Enter User Name" } })
+                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-3 required" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email", @title = "Enter E-mail Id" } })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-3 required" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone Number", @title = "Enter Phone Number" } })
+                                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        if (!IsEdit)
+                        {
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.Password, new { @class = "col-md-3 required" })
+                                <div class="col-md-9">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @title = "Enter Password" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-3 required" })
+                                <div class="col-md-9">
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", @title = "Enter Confirm Password" })
+                                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            @Html.HiddenFor(t => t.Password)
+                            @Html.HiddenFor(t => t.ConfirmPassword)
+                            @Html.HiddenFor(t => t.Id)
+                        }
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.RoleId, new { @class = "col-md-3" })
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(t => t.RoleId, Model.AspNetRolesList, new { @id = "ddlRole", @multiple = "multiple", @class = "form-control ", @title = "Select Role" })
+                                @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(m => m.SelectedRoleNames, new { @id = "hdnSelectedRoleNames" })
+
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group col-md-12">
+                            <center>
+                                @if (!IsEdit)
+                                {
+                                    <input type="submit" class="btn btn-success" value="Register" title="Register" />
+                                        <input type="reset" class="btn btn-warning" value="Clear" title="Clear" />
+                                }
+                                else
+                                {
+                                    <input type="submit" class="btn btn-success" value="Update" title="Update" />
+                                        <input type="reset" class="btn btn-warning" value="Revert" title="Revert" />
+                                        @Html.HiddenFor(t => t.Id)
+                                }
+                                <a class="btn btn-info" title="Back To List" href="@Url.Action("Users","Account" )"> Back To List</a>
+                            </center>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(function () {
+
+        $("#ddlRole").multiselect({
+            includeSelectAllOption: true,
+            enableCaseInsensitiveFiltering: true,
+            enableFiltering: true,
+            //maxHeight: 200,
+            buttonWidth: '100%',
+            onSelectAll: function (checked) {
+                var selectedRole = ($("#ddlRole").val() != null ? $("#ddlRole").val().join(',') : "");
+                $("#hdnSelectedRoleNames").val(selectedRole);
+            },
+            onChange: function (element, checked) {
+                var selectedRole = ($("#ddlRole").val() != null ? $("#ddlRole").val().join(',') : "");
+                $("#hdnSelectedRoleNames").val(selectedRole);
+            }
+        });
+
+        var selectedRoleName = $("#hdnSelectedRoleNames").val();
+        if (selectedRoleName != "") {
+            var roleArray = selectedRoleName.split(",");
+            // Set the value
+            $("#ddlRole").val(roleArray);
+            // Then refresh
+            $("#ddlRole").multiselect("refresh");
+        }
+    });
+</script>

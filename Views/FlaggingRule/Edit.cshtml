@@ -1,0 +1,93 @@
+﻿@model AyushmanBharat.Models.ViewModels.FlaggingRuleVM
+@{
+    ViewBag.Title = "Flagging Rule";
+}
+
+<section class="content-header">
+    <h1>
+        Edit Flagging Rule
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Edit</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body pad">
+                    @using (Html.BeginForm("Edit", "FlaggingRule", FormMethod.Post, new { id = "frmFlaggingRule" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @Html.HiddenFor(model => model.FlaggingRuleID)
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.RuleParameter, htmlAttributes: new { @class = "control-label col-md-3 required" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.RuleParameter, new { htmlAttributes = new { @class = "form-control", maxlength = "500" } })
+                                    @Html.ValidationMessageFor(model => model.RuleParameter, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Red, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.Red, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Red, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Green, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.Green, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Green, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Amber, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.Amber, new { htmlAttributes = new { @class = "form-control"} })
+                                    @Html.ValidationMessageFor(model => model.Amber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-3 required" })
+                                <div class="col-md-9">
+                                    @*Active @Html.RadioButtonFor(m => m.Active, "True")
+                                      InActive @Html.RadioButtonFor(m => m.Active, "False")*@
+                                    @Html.CheckBoxFor(model => model.Active, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="form-group col-md-12">
+                                <center>
+                                    @Html.HiddenFor(model => model.CreatedOn)
+                                    @Html.HiddenFor(model => model.MappingFunction)
+                                    <input type="submit" class="btn btn-success" value="Update" title="Update" />
+                                    <input type="reset" class="btn btn-warning" value="Revert" title="Revert" />
+                                    <a class="btn btn-info" title="Back To List" href="@Url.Action("Index","FlaggingRule" )"> Back To List</a>
+                                </center>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
